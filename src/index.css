@@ -1,0 +1,106 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --gradient-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  --gradient-accent: linear-gradient(135deg, #4a0e4e 0%, #813b8f 50%, #c04de2 100%);
+  --gradient-text: linear-gradient(135deg, #e94560 0%, #533483 50%, #0f3460 100%);
+}
+
+body {
+  background: var(--gradient-bg);
+  color: #ffffff;
+}
+
+.bg-gradient-primary {
+  background: var(--gradient-bg);
+}
+
+.bg-gradient-accent {
+  background: var(--gradient-accent);
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: var(--gradient-text);
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px #c04de2; }
+  50% { box-shadow: 0 0 20px #c04de2; }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes scale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-scale {
+  animation: scale 2s ease-in-out infinite;
+}
+
+.parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+.hover\:shadow-lg:hover {
+  box-shadow: 0 10px 15px -3px rgba(192, 77, 226, 0.3), 0 4px 6px -2px rgba(192, 77, 226, 0.2);
+}
+
+/* 3D Lightning Robot Background */
+.lightning-robot-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.1;
+  background-image: url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.5) contrast(1.2) hue-rotate(240deg);
+}
+
+.lightning-robot-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(192, 77, 226, 0.1) 0%, rgba(192, 77, 226, 0) 50%),
+    radial-gradient(circle at 80% 80%, rgba(15, 52, 96, 0.1) 0%, rgba(15, 52, 96, 0) 50%);
+}
+
+/* Animate the background */
+@keyframes lightningPulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.2; }
+}
+
+.lightning-robot-bg {
+  animation: lightningPulse 5s infinite;
+}
