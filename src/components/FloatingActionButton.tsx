@@ -5,7 +5,7 @@ interface FloatingActionButtonProps {
   isDarkTheme: boolean;
 }
 
-const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({ isDarkTheme }) => {
+const FloatingActionButton: React.FC<FloatingActionButtonProps> = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [message, setMessage] = useState('');
 

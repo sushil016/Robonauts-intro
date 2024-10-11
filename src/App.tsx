@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 
@@ -46,17 +46,17 @@ function App() {
           <Route path="/" element={
             <>
               <LandingPage />
-              <ClubOverview isDarkTheme={isDarkTheme} />
-              <ProjectShowcase isDarkTheme={isDarkTheme} />
-              <TeamMembers isDarkTheme={isDarkTheme} />
-              <EventsAndCompetitions isDarkTheme={isDarkTheme} />
-              <CoursesAndWorkshops isDarkTheme={isDarkTheme} />
+              <ClubOverview  />
+              <ProjectShowcase  />
+              <TeamMembers  />
+              <EventsAndCompetitions/>
+              <CoursesAndWorkshops  />
             </>
           } />
           <Route path="/resources" element={<Resources isDarkTheme={isDarkTheme} />} />
           <Route path="/contact" element={<Contact isDarkTheme={isDarkTheme} />} />
         </Routes>
-        <Footer isDarkTheme={isDarkTheme} />
+        <Footer  />
         <RobotMascot scrollPosition={scrollPosition} />
         <FloatingActionButton isDarkTheme={isDarkTheme} />
       </div>

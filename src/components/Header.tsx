@@ -6,7 +6,7 @@ interface HeaderProps {
   isDarkTheme: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ isDarkTheme }) => {
+const Header: React.FC<HeaderProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
