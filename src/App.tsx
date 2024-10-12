@@ -8,12 +8,12 @@ import TeamMembers from './components/TeamMembers';
 import EventsAndCompetitions from './components/EventsAndCompetitions';
 import CoursesAndWorkshops from './components/CoursesAndWorkshops';
 import Footer from './components/Footer';
-
 import FloatingActionButton from './components/FloatingActionButton';
 import Resources from './components/Resources';
 import Contact from './components/Contact';
 import RobotMascot from './components/RobotMascotProps';
 import LandingPage from './components/Landingpage';
+import ThemeSwitch from './components/ThemeSwitch';
 
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -31,16 +31,16 @@ function App() {
     };
   }, []);
 
-  // const toggleTheme = () => {
-  //   setIsDarkTheme(!isDarkTheme);
-  // };
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
 
   return (
     <Router>
       <div className={`min-h-screen bg-gradient-to-br from-purple-900 via-black to-indigo-900 text-white`}>
         <div className="lightning-robot-bg"></div>
         <Header isDarkTheme={isDarkTheme} />
-        {/* <ThemeSwitch isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} /> */}
+        <ThemeSwitch isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} />
         <Routes>
           <Route path="/" element={
             <>
