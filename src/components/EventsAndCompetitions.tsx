@@ -3,9 +3,9 @@ import { Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const events = [
-  { date: '2024-05-15', title: 'Annual Robotics Showcase', description: 'Present your projects to the university community.' },
-  { date: '2024-06-20', title: 'National Robotics Competition', description: 'Compete against top universities in robotics challenges.' },
-  { date: '2024-09-10', title: 'Robotics Workshop Series', description: 'Learn advanced techniques from industry experts.' },
+  { date: '2024-03-12', title: 'RoboWars', description: 'showcasing the Best soccerBots in BVCOEnm Campus ' },
+  { date: '2024-06-20', title: 'Robotic Workshop', description: 'A Huge workshop has begun in bvcoenm campus by team Robonauts.' },
+  { date: '2022-11-20', title: 'SIH 2022 Winner', description: 'Developed a fully Autonomus Drone' },
 ];
 
 const EventsAndCompetitions: React.FC = () => {

@@ -14,7 +14,7 @@ const RoboticHeader: React.FC = () => {
           </svg>
         </div>
       </div>
-      <h1 className="text-5xl font-bold text-purple-300 mb-4">Robonauts Club</h1>
+      <h1 className="text-5xl font-bold text-purple-300 mb-4">Team Robonauts</h1>
       <p className="text-xl text-purple-400">Exploring the Future of Robotics</p>
     </header>
   )

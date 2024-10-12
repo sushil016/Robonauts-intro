@@ -3,6 +3,7 @@
 import React from 'react'
 import { Book, Video, Link } from 'lucide-react'
 import { motion } from 'framer-motion'
+import RoboticHeader from './RoboticHeader'
 
 interface Resource {
   title: string
@@ -42,7 +43,8 @@ const ResourceCard: React.FC<Resource> = ({ title, type, description }) => {
 
 const ResourcesPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-950 to-black text-purple-50  py-12 px-4 sm:px-6 lg:px-8 sm:pt-32">
+    <div className="min-h-screen bg-gradient-to-b from-purple-950 to-black text-purple-50  py-12 px-4 sm:px-6 lg:px-8 sm:pt-14">
+      <RoboticHeader />
       <div className="max-w-7xl mx-auto">
         <motion.h1
           className="text-5xl font-bold text-gradient text-center text-white mb-12"
