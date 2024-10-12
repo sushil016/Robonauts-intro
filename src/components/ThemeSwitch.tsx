@@ -1,12 +1,12 @@
 import React from 'react';
 import { Sun, Moon } from 'lucide-react';
 
-interface ThemeSwitchProps {
-  isDarkTheme: boolean;
-  toggleTheme: () => void;
-}
+// interface ThemeSwitchProps {
+//   isDarkTheme: boolean;
+//   toggleTheme: () => void;
+// }
 
-const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ isDarkTheme, toggleTheme }) => {
+const ThemeSwitch: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}

@@ -13,11 +13,13 @@ import Resources from './components/Resources';
 import Contact from './components/Contact';
 import RobotMascot from './components/RobotMascotProps';
 import LandingPage from './components/Landingpage';
-import ThemeSwitch from './components/ThemeSwitch';
+import ExploreButtons from './components/ExploreButtons';
+
+
 
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
-   const [isDarkTheme, setIsDarkTheme] = useState(true);
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,16 +33,16 @@ function App() {
     };
   }, []);
 
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
+  // const toggleTheme = () => {
+  //   setIsDarkTheme(!isDarkTheme);
+  // };
 
   return (
     <Router>
       <div className={`min-h-screen bg-gradient-to-br from-purple-900 via-black to-indigo-900 text-white`}>
         <div className="lightning-robot-bg"></div>
-        <Header isDarkTheme={isDarkTheme} />
-        <ThemeSwitch isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} />
+        <Header  />
+        {/* <ThemeSwitch /> */}
         <Routes>
           <Route path="/" element={
             <>
@@ -49,16 +51,17 @@ function App() {
               <ProjectShowcase  />
               <TeamMembers  />
               <EventsAndCompetitions/>
-              
+              <ExploreButtons />
             </>
           } />
           <Route path="/courses" element={<CoursesAndWorkshops  />} />
           <Route path="/resources" element={<Resources/>} />
           <Route path="/contact" element={<Contact  />} />
         </Routes>
+        
         <Footer  />
         <RobotMascot scrollPosition={scrollPosition} />
-        <FloatingActionButton isDarkTheme={isDarkTheme} />
+        <FloatingActionButton  />
       </div>
     </Router>
   );

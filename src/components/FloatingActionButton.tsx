@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 
-interface FloatingActionButtonProps {
-  isDarkTheme: boolean;
-}
-
-const FloatingActionButton: React.FC<FloatingActionButtonProps> = () => {
+const FloatingActionButton: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [message, setMessage] = useState('');
 

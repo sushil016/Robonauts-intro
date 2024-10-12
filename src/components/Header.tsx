@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom';
 import { Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-interface HeaderProps {
-  isDarkTheme: boolean;
-}
 
-const Header: React.FC<HeaderProps> = () => {
+
+const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
