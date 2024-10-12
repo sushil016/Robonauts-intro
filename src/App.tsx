@@ -10,7 +10,6 @@ import CoursesAndWorkshops from './components/CoursesAndWorkshops';
 import Footer from './components/Footer';
 
 import FloatingActionButton from './components/FloatingActionButton';
-import ThemeSwitch from './components/ThemeSwitch';
 import Resources from './components/Resources';
 import Contact from './components/Contact';
 import RobotMascot from './components/RobotMascotProps';
@@ -18,7 +17,7 @@ import LandingPage from './components/Landingpage';
 
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,16 +31,16 @@ function App() {
     };
   }, []);
 
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
+  // const toggleTheme = () => {
+  //   setIsDarkTheme(!isDarkTheme);
+  // };
 
   return (
     <Router>
-      <div className={`min-h-screen bg-gradient-primary text-white`}>
+      <div className={`min-h-screen bg-gradient-to-br from-purple-900 via-black to-indigo-900 text-white`}>
         <div className="lightning-robot-bg"></div>
         <Header isDarkTheme={isDarkTheme} />
-        <ThemeSwitch isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} />
+        {/* <ThemeSwitch isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} /> */}
         <Routes>
           <Route path="/" element={
             <>
@@ -50,11 +49,12 @@ function App() {
               <ProjectShowcase  />
               <TeamMembers  />
               <EventsAndCompetitions/>
-              <CoursesAndWorkshops  />
+              
             </>
           } />
-          <Route path="/resources" element={<Resources isDarkTheme={isDarkTheme} />} />
-          <Route path="/contact" element={<Contact isDarkTheme={isDarkTheme} />} />
+          <Route path="/courses" element={<CoursesAndWorkshops  />} />
+          <Route path="/resources" element={<Resources/>} />
+          <Route path="/contact" element={<Contact  />} />
         </Routes>
         <Footer  />
         <RobotMascot scrollPosition={scrollPosition} />

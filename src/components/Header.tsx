@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = () => {
             <li><a href="#projects" className="hover:text-purple-400 transition-colors">Projects</a></li>
             <li><a href="#team" className="hover:text-purple-400 transition-colors">Team</a></li>
             <li><a href="#events" className="hover:text-purple-400 transition-colors">Events</a></li>
-            <li><a href="#courses" className="hover:text-purple-400 transition-colors">Courses</a></li>
+            <li><a href="/courses" className="hover:text-purple-400 transition-colors">Courses</a></li>
             <li><Link to="/resources" className="hover:text-purple-400 transition-colors">Resources</Link></li>
             <li><Link to="/contact" className="hover:text-purple-400 transition-colors">Contact</Link></li>
           </ul>

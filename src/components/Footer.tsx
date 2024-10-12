@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-gray-900 py-12">
+    <footer className="bg-black py-12">
       <div className="container mx-auto px-4">
         <div className="flex justify-center space-x-6 mb-8">
           <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
           </a>
         </div>
         <p className="text-center text-gray-400 mb-8">
-          © 2024 RoboClub. All rights reserved.
+          © 2024 Robonauts. All rights reserved.
         </p>
         <button
           onClick={scrollToTop}

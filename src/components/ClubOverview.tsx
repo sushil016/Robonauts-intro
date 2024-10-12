@@ -37,10 +37,10 @@ export default function Component() {
   }, [controls])
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-purple-950 via-indigo-950 to-blue-950" ref={ref}>
+    <div className="min-h-auto py-24 flex items-center justify-center p-4 " ref={ref}>
       <div className="max-w-6xl w-full">
         <motion.h2
-          className="text-4xl font-bold text-center text-white mb-12"
+          className="text-4xl font-bold text-center text-gradient mb-12"
           initial="hidden"
           animate={controls}
           variants={{

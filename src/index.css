@@ -5,7 +5,7 @@
 :root {
   --gradient-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   --gradient-accent: linear-gradient(135deg, #4a0e4e 0%, #813b8f 50%, #c04de2 100%);
-  --gradient-text: linear-gradient(135deg, #e94560 0%, #533483 50%, #0f3460 100%);
+  --gradient-text: linear-gradient(135deg, #e94560 0%, #9e6fe5 50%, #0cc3f5 100%);
 }
 
 body {

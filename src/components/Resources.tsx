@@ -1,57 +1,83 @@
-import React from 'react';
-import { Book, Video, Link as LinkIcon } from 'lucide-react';
+"use client"
 
-interface ResourcesProps {
-  isDarkTheme: boolean;
+import React from 'react'
+import { Book, Video, Link } from 'lucide-react'
+import { motion } from 'framer-motion'
+
+interface Resource {
+  title: string
+  type: 'book' | 'video' | 'resource'
+  description: string
 }
 
-const Resources: React.FC<ResourcesProps> = ({ isDarkTheme }) => {
-  const resources = [
-    { title: 'Introduction to Robotics', type: 'book', link: '#' },
-    { title: 'Advanced AI for Robotics', type: 'video', link: '#' },
-    { title: 'ROS Tutorial', type: 'link', link: '#' },
-    { title: 'Machine Learning for Robotics', type: 'book', link: '#' },
-    { title: 'Computer Vision Techniques', type: 'video', link: '#' },
-    { title: 'Arduino Projects for Beginners', type: 'link', link: '#' },
-  ];
+const resources: Resource[] = [
+  { title: 'Introduction to Robotics', type: 'book', description: 'Click to access this book.' },
+  { title: 'Advanced AI for Robotics', type: 'video', description: 'Click to access this video.' },
+  { title: 'ROS Tutorial', type: 'resource', description: 'Click to access this resource.' },
+  { title: 'Machine Learning for Robotics', type: 'book', description: 'Click to access this book.' },
+  { title: 'Computer Vision Techniques', type: 'video', description: 'Click to access this video.' },
+  { title: 'Arduino Projects for Beginners', type: 'resource', description: 'Click to access this resource.' },
+]
 
-  const getIcon = (type: string) => {
-    switch (type) {
-      case 'book':
-        return <Book className="w-6 h-6" />;
-      case 'video':
-        return <Video className="w-6 h-6" />;
-      case 'link':
-        return <LinkIcon className="w-6 h-6" />;
-      default:
-        return null;
-    }
-  };
+const ResourceCard: React.FC<Resource> = ({ title, type, description }) => {
+  const Icon = type === 'book' ? Book : type === 'video' ? Video : Link
 
   return (
-    <div className={`min-h-screen ${isDarkTheme ? 'bg-gray-900' : 'bg-gray-100'} py-20`}>
-      <div className="container mx-auto px-4">
-        <h2 className={`text-4xl font-bold mb-12 text-center ${isDarkTheme ? 'text-white' : 'text-gray-900'}`}>Resources</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <motion.div
+      className="bg-purple-900 bg-opacity-50 rounded-lg p-6 flex flex-col space-y-2 hover:bg-purple-800 hover:bg-opacity-60 transition-colors duration-200"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="flex items-center space-x-3">
+        <Icon className="w-6 h-6 text-purple-200" />
+        <h3 className="text-xl font-semibold text-white">{title}</h3>
+      </div>
+      <p className="text-purple-100">{description}</p>
+    </motion.div>
+  )
+}
+
+const ResourcesPage: React.FC = () => {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-purple-950 to-black text-purple-50  py-12 px-4 sm:px-6 lg:px-8 sm:pt-32">
+      <div className="max-w-7xl mx-auto">
+        <motion.h1
+          className="text-5xl font-bold text-gradient text-center text-white mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+         {"<"} Code : Resources{"/>"}
+        </motion.h1>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.2
+              }
+            }
+          }}
+          initial="hidden"
+          animate="show"
+        >
           {resources.map((resource, index) => (
-            <a
-              key={index}
-              href={resource.link}
-              className={`${isDarkTheme ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-50'} p-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105`}
-            >
-              <div className="flex items-center mb-4">
-                {getIcon(resource.type)}
-                <h3 className={`ml-3 text-xl font-semibold ${isDarkTheme ? 'text-white' : 'text-gray-900'}`}>{resource.title}</h3>
-              </div>
-              <p className={`${isDarkTheme ? 'text-gray-300' : 'text-gray-600'}`}>
-                Click to access this {resource.type === 'link' ? 'resource' : resource.type}.
-              </p>
-            </a>
+            <motion.div key={index} variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0 }
+            }}>
+              <ResourceCard {...resource} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Resources;
+export default ResourcesPage
