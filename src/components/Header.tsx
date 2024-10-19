@@ -49,7 +49,7 @@ const Header: React.FC = () => {
           </button>
         </div>
         <nav className="hidden md:block">
-          <ul className="flex space-x-8">
+          <ul className="flex space-x-8 text-textPrimary">
             <li><Link to="/" className="hover:text-purple-400 transition-colors">Home</Link></li>
             <li><a href="#projects" className="hover:text-purple-400 transition-colors">Projects</a></li>
             <li><a href="#team" className="hover:text-purple-400 transition-colors">Team</a></li>

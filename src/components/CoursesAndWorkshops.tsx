@@ -12,7 +12,7 @@ const CoursesAndWorkshops: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section className="py-2 bg-gradient-to-b from-purple-950 to-black text-purple-50 pt-14">
+    <section className="py-2 text-purple-50 pt-14 backdrop-blur-lg">
        <RoboticHeader />
       <div className="container mx-auto px-16">
        

@@ -19,9 +19,9 @@ const ProjectShowcase: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="py-20">
+    <section id="projects" className="py-20 backdrop-blur-lg">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold mb-12 text-center">Project Showcase</h2>
+        <h2 className="text-4xl font-bold mb-12 text-center text-gradient">Project Showcase</h2>
         <div className="relative">
           <div className="flex items-center justify-center">
             <button onClick={prevProject} className="absolute left-0 z-10">

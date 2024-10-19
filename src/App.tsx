@@ -13,7 +13,7 @@ import Resources from './components/Resources';
 import Contact from './components/Contact';
 import RobotMascot from './components/RobotMascotProps';
 import LandingPage from './components/Landingpage';
-import ExploreButtons from './components/ExploreButtons';
+
 
 
 
@@ -51,7 +51,7 @@ function App() {
               <ProjectShowcase  />
               <TeamMembers  />
               <EventsAndCompetitions/>
-              <ExploreButtons />
+              {/* <ExploreButtons /> */}
             </>
           } />
           <Route path="/courses" element={<CoursesAndWorkshops  />} />
@@ -60,6 +60,7 @@ function App() {
         </Routes>
         
         <Footer  />
+      
         <RobotMascot scrollPosition={scrollPosition} />
         <FloatingActionButton  />
       </div>

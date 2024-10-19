@@ -37,7 +37,7 @@ export default function Component() {
   }, [controls])
 
   return (
-    <div className="min-h-auto py-24 flex items-center justify-center p-4 " ref={ref}>
+    <div className="min-h-auto py-24 flex items-center justify-center p-4 backdrop-blur-lg " ref={ref}>
       <div className="max-w-6xl w-full">
         <motion.h2
           className="text-4xl font-bold text-center text-gradient mb-12"
@@ -54,7 +54,7 @@ export default function Component() {
           {activities.map((activity, index) => (
             <motion.div
               key={activity.title}
-              className="bg-gradient-to-br from-purple-800 to-blue-950 rounded-lg p-6 flex flex-col items-center text-center relative overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              className="bg-zinc-900 rounded-lg p-6 flex flex-col items-center text-center relative overflow-hidden shadow-2xl hover:shadow-2xl transition-shadow duration-300"
               initial="hidden"
               animate={controls}
               variants={{

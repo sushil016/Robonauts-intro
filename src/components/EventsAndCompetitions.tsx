@@ -14,11 +14,11 @@ const EventsAndCompetitions: React.FC = () => {
   return (
  
 
-    <section id="events" className="py-20">
+    <section id="events" className="py-20 backdrop-blur-lg">
       <div className="container mx-auto px-12">
         <h2 className="text-4xl font-bold mb-12 text-center text-gradient">Events & Competitions</h2>
         <div className="relative">
-          <div className="absolute left-0 w-1 bg-gradient-to-b from-indigo-900 to-indigo-500 h-full"></div>
+          <div className="absolute left-0 w-1 backdrop-blur-lg h-full"></div>
           {events.map((event, index) => (
             <motion.div
               key={index}
@@ -33,7 +33,7 @@ const EventsAndCompetitions: React.FC = () => {
                 <Calendar className="w-4 h-4 text-white" />
               </div>
               <motion.div
-                className="bg-indigo-950 rounded-lg p-6 flex-grow cursor-pointer transform transition duration-300"
+                className="bg-[#19162480] rounded-lg p-6 flex-grow cursor-pointer transform transition duration-300 "
                 onClick={() => setSelectedEvent(index)}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.95 }}
