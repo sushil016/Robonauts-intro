@@ -25,7 +25,7 @@ const TeamMembers: React.FC = () => {
   };
 
   return (
-    <section id="team" className="py-20 bg-opacity-50 backdrop-blur-lg">
+    <section id="team" className="py-20 bg-opacity-50 backdrop-blur-lg w-full h-screen">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-12 text-center">Our Team</h2>
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">

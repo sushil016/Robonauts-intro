@@ -9,6 +9,7 @@ export default {
       colors: {
         "textPrimary" : "#468DE6",
         "textSec": "#CAA6F7",
+        "bgPrimary": "bg-gradient-to-b from-indigo-950 to-black",
         "color-1": "hsl(var(--color-1))",
         "color-2": "hsl(var(--color-2))",
         "color-3": "hsl(var(--color-3))",

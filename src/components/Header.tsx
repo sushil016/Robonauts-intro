@@ -31,7 +31,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-gradient-primary shadow-lg' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-lg' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center space-x-2 md:ml-11">
           <Cpu className="w-8 h-8 text-purple-400" />
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
             </svg>
           </button>
         </div>
-        <nav className="hidden md:block">
+        <nav className="hidden md:block ">
           <ul className="flex space-x-8 text-textPrimary">
             <li><Link to="/" className="hover:text-purple-400 transition-colors">Home</Link></li>
             <li><a href="#projects" className="hover:text-purple-400 transition-colors">Projects</a></li>

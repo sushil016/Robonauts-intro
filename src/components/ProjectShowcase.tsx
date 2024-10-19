@@ -19,7 +19,7 @@ const ProjectShowcase: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="py-20 backdrop-blur-lg">
+    <section id="projects" className="py-20 backdrop-blur-lg w-full h-[100vw]">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-12 text-center text-gradient">Project Showcase</h2>
         <div className="relative">

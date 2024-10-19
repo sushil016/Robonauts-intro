@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 
 import ClubOverview from './components/ClubOverview';
-import ProjectShowcase from './components/ProjectShowcase';
-import TeamMembers from './components/TeamMembers';
 import EventsAndCompetitions from './components/EventsAndCompetitions';
 import CoursesAndWorkshops from './components/CoursesAndWorkshops';
 import Footer from './components/Footer';
@@ -13,6 +11,7 @@ import Resources from './components/Resources';
 import Contact from './components/Contact';
 import RobotMascot from './components/RobotMascotProps';
 import LandingPage from './components/Landingpage';
+import HorizontalScrollPage from './components/HorizontalScrollPage';
 
 
 
@@ -48,8 +47,7 @@ function App() {
             <>
               <LandingPage />
               <ClubOverview  />
-              <ProjectShowcase  />
-              <TeamMembers  />
+              <HorizontalScrollPage />
               <EventsAndCompetitions/>
               {/* <ExploreButtons /> */}
             </>
