@@ -13,6 +13,7 @@ import RobotMascot from './components/RobotMascotProps';
 import LandingPage from './components/Landingpage';
 import HorizontalScrollPage from './components/HorizontalScrollPage';
  import {Meteor} from "./components/Metors";
+import TeamMembers from './components/TeamMembers';
 
 
 
@@ -50,7 +51,7 @@ function App() {
               <ClubOverview  />
               <Meteor />
               <HorizontalScrollPage />
-              
+              <TeamMembers />
               <EventsAndCompetitions/>
               {/* <ExploreButtons /> */}
             </>

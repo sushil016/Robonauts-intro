@@ -2,13 +2,13 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProjectShowcase from "./ProjectShowcase";
-import TeamMembers from "./TeamMembers";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HorizontalScrollPage = () => {
   const sectionRef = useRef(null);
-  const horizontalContainerRef = useRef(null);
+  const horizontalContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const sections = gsap.utils.toArray(".horizontal-section");
@@ -22,7 +22,7 @@ const HorizontalScrollPage = () => {
         start: "top top",
         pin: true,
         scrub: 1,
-        end: () => `+=${horizontalContainer.offsetWidth - window.innerWidth}`,
+        end: () => horizontalContainer ? `+=${horizontalContainer.offsetWidth - window.innerWidth}` : '+=0',
         invalidateOnRefresh: true,
       },
     });
@@ -43,7 +43,10 @@ const HorizontalScrollPage = () => {
           <ProjectShowcase />
         </div>
         <div className="horizontal-section w-screen h-screen flex-shrink-0">
-          <TeamMembers />
+          <ProjectShowcase/>
+        </div>
+        <div className="horizontal-section w-screen h-screen flex-shrink-0">
+          <ProjectShowcase/>
         </div>
       </div>
     </section>

@@ -37,7 +37,7 @@ export default function Component() {
   }, [controls])
 
   return (
-    <div className="min-h-auto py-24 flex items-center justify-center p-4 backdrop-blur-lg " ref={ref}>
+    <div className="min-h-auto py-24 flex items-center justify-center p-4 " ref={ref}>
       <div className="max-w-6xl w-full">
         <motion.h2
           className="text-4xl font-bold text-center text-gradient mb-12"
