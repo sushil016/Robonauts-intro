@@ -12,6 +12,7 @@ import Contact from './components/Contact';
 import RobotMascot from './components/RobotMascotProps';
 import LandingPage from './components/Landingpage';
 import HorizontalScrollPage from './components/HorizontalScrollPage';
+ import {Meteor} from "./components/Metors";
 
 
 
@@ -47,7 +48,9 @@ function App() {
             <>
               <LandingPage />
               <ClubOverview  />
+              <Meteor />
               <HorizontalScrollPage />
+              
               <EventsAndCompetitions/>
               {/* <ExploreButtons /> */}
             </>
