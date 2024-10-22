@@ -18,8 +18,8 @@ const LandingPage: React.FC = () => {
         }}></div>
       </div>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <h1 className="text-6xl font-bold mb-4 animate-pulse">Welcome to Robonauts</h1>
-        <p className="text-2xl mb-8 text-textPrimary">Innovate. Create. Automate.</p>
+        <h1 className="md:text-[6rem] sm:text-[4rem] text-6xl font-bold mb-4 animate-pulse">Welcome to Robonauts</h1>
+        <p className="text-3xl mb-8 text-textPrimary">Innovate. Create. Automate.</p>
         <div className="animate-bounce mt-16">
           <ChevronDown className="w-12 h-12 text-white" />
         </div>
@@ -27,7 +27,7 @@ const LandingPage: React.FC = () => {
           {/* <NavbarBoxes /> */}
           
        </div>
-       <Rover />
+       <Rover/>
        <Robot/>
       </div>
       <HomePageButton />

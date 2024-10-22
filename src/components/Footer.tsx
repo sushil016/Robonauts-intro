@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className=" py-12 backdrop-blur-lg">
+    <footer className=" py-12 bg-black">
       <div className="container mx-auto px-4">
         <div className="flex justify-center space-x-6 mb-8">
           <a href="https://www.instagram.com/robonauts_team?igsh=MTNzdXlrNGI4OHo4NA==" className="text-gray-400 hover:text-white transition-colors">

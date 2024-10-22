@@ -25,34 +25,34 @@ const Header: React.FC = () => {
     };
   }, []);
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   gsap.from(navRef.current, {
-  //     y:-50,
-  //     opacity:0,
-  //     duration:1,
-  //     dealy:0.3,
-  //     stagger: 0.2,
-  //     ease: 'power2.out',
+    gsap.from(navRef.current, {
+      y:-50,
+      opacity:0,
+      duration:1,
+      dealy:0.3,
+      stagger: 0.2,
+      ease: 'power2.out',
 
-  //   })
-  //   // gsap.fromTo(navRef.current, 
-  //   //   { y: -50, opacity: 0 }, 
-  //   //   { 
-  //   //     y: 0, 
-  //   //     opacity: 1, 
-  //   //     duration: 1, 
-  //   //     delay: 0.6, 
-  //   //     ease: 'power2.out',
-  //   //     scrollTrigger: {
-  //   //       trigger: navRef.current,
-  //   //       start: 'top top',
-  //   //       end: '+=100',
-  //   //       scrub: 1,
-  //   //     },
-  //   //   }
-  //   // );
-  // }, []);
+    })
+    gsap.fromTo(navRef.current, 
+      { y: -50, opacity: 0 }, 
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 1, 
+        delay: 0.6, 
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: navRef.current,
+          start: 'top top',
+          end: '+=100',
+          scrub: 1,
+        },
+      }
+    );
+  }, []);
 
   const menuVariants = {
     hidden: { opacity: 0, x: '100%' },

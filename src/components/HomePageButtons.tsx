@@ -27,15 +27,15 @@ const Card: FC<CardProps> = ({ title, content, onClick }) => {
   return (
     <motion.div
       ref={cardRef}
-      className="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg sm:p-4 p-3 sm:w-64 sm:h-50 flex flex-col justify-between cursor-pointer"
+      className="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg sm:p-4 p-2 sm:w-64 sm:h-50 flex flex-col justify-between cursor-pointer"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
     >
       <div className="flex gap-5 justify-center">
-        <h2 className="text-2xl font-bold text-gradient mb-4 ">{title}</h2>
+        <h2 className="md:text-2xl flex justify-center font-bold text-gradient ">{title}</h2>
         <motion.div
-          className="w-8 h-8 mb-3  bg-neutral-200 rounded-full flex items-center justify-center sm:self-end self-center"
+          className="w-8 h-8 mb-1  bg-neutral-200 rounded-full flex items-center justify-center sm:self-end self-center"
           whileHover={{ scale: 1.2, rotate: 90 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
         >
@@ -53,7 +53,7 @@ const Card: FC<CardProps> = ({ title, content, onClick }) => {
           </svg>
         </motion.div>
       </div>
-      <p className="text-textSec mb-4 sm:block hidden justify-center items-center ml-3">{content}</p>
+      <p className="text-textSec mb-4 sm:block hidden justify-center items-center ml-3 text-sm">{content}</p>
     </motion.div>
   );
 };    
@@ -138,7 +138,7 @@ const HomePageButton: FC = () => {
         <Card
           onClick={resClickHandeler}
           title="Resources"
-          content=" documentation and tutorials "
+          content="documentation / tutorial"
         />
         <Card
           onClick={contactClickhandler}

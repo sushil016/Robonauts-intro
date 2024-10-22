@@ -39,7 +39,7 @@ function App() {
 
   return (
     <Router>
-      <div className={`min-h-screen bg-gradient-to-br from-purple-900 via-black to-indigo-900 text-white`}>
+      <div className={`min-h-screen bg-gradient-to-br from-purple-900 to-indigo-900 text-white`}>
         <div className="lightning-robot-bg"></div>
         <Header  />
         {/* <ThemeSwitch /> */}
