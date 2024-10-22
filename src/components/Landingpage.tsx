@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import HomePageButton from './HomePageButtons';
-import Rover from './homepageanimation/Rover';
+
 import Robot from './homepageanimation/Robot';
 import './LandingPage.css';
 
@@ -27,7 +27,7 @@ const LandingPage: React.FC = () => {
           {/* <NavbarBoxes /> */}
           
        </div>
-       <Rover/>
+       {/* <Rover/> */}
        <Robot/>
       </div>
       <HomePageButton />
