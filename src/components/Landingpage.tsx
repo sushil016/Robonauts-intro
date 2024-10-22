@@ -3,11 +3,11 @@ import { ChevronDown } from 'lucide-react';
 import HomePageButton from './HomePageButtons';
 import Rover from './homepageanimation/Rover';
 import Robot from './homepageanimation/Robot';
-
+import './LandingPage.css';
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="relative h-screen">
+    <div className="relative h-screen landing-page">
       <div className="fixed inset-0 bg-black">
         <div className="w-full h-full" style={{
           backgroundImage: "url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",

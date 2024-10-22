@@ -9,6 +9,7 @@ export default {
       colors: {
         "textPrimary" : "#468DE6",
         "textSec": "#CAA6F7",
+        "bgPrimary": "#1D1D1D",
       },
       extend: {
         animation: {

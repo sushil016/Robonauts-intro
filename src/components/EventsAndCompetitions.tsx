@@ -14,7 +14,7 @@ const EventsAndCompetitions: React.FC = () => {
   return (
  
 
-    <section id="events" className="py-20 backdrop-blur-lg">
+    <section id="events" className="py-20 bg-bgPrimary">
       <div className="container mx-auto px-12">
         <h2 className="text-4xl font-bold mb-12 text-center text-gradient">Events & Competitions</h2>
         <div className="relative">

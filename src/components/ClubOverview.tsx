@@ -38,8 +38,8 @@ export default function Component() {
   }, [controls])
 
   return (
-    <div className="min-h-auto py-24 flex items-center justify-center p-4 " ref={ref}>
-      <div className="max-w-6xl w-full">
+    <div className="min-h-auto py-24 flex items-center justify-center p-4 bg-black" ref={ref}>
+      <div className="max-w-6xl w-full bg-black">
         <motion.h2
           className="text-4xl font-bold text-center text-gradient mb-12"
           initial="hidden"
