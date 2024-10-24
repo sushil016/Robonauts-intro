@@ -35,7 +35,7 @@ const HorizontalScrollPage = () => {
     <section ref={sectionRef} className="overflow-hidden">
       <div 
         ref={horizontalContainerRef} 
-        className="flex bg-gradient-to-b from-indigo-950 to-black"
+        className="flex "
         style={{ width: "200vw" }}
       >
         <div className="horizontal-section w-screen h-screen flex-shrink-0">

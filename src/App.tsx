@@ -1,8 +1,6 @@
 import  { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-
-import ClubOverview from './components/ClubOverview';
 import EventsAndCompetitions from './components/EventsAndCompetitions';
 import CoursesAndWorkshops from './components/CoursesAndWorkshops';
 import Footer from './components/Footer';
@@ -39,7 +37,7 @@ function App() {
 
   return (
     <Router>
-      <div className={`min-h-screen bg-gradient-to-br from-purple-900 to-indigo-900 text-white`}>
+      <div className={`min-h-screen  text-white`}>
         <div className="lightning-robot-bg"></div>
         <Header  />
         {/* <ThemeSwitch /> */}
@@ -47,9 +45,9 @@ function App() {
           <Route path="/" element={
             <>
               <LandingPage />
-              <ClubOverview  />
+              {/* <ClubOverview  /> */}
               {/* <Meteor/> */}
-             <Projects/>
+              <Projects/>
               <TeamMembers />
               <EventsAndCompetitions/>
               {/* <ExploreButtons /> */}
@@ -70,3 +68,6 @@ function App() {
 }
 
 export default App;
+
+
+// bg-gradient-to-br from-purple-900 to-indigo-900

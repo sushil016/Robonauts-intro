@@ -85,7 +85,7 @@ export default function Component() {
   }
 
   return (
-    <div className="min-h-auto py-24 flex items-center justify-center p-4 bg-gradient-to-b from-black to-zinc-900" ref={ref}
+    <div className="min-h-auto py-24 flex items-center justify-center p-4 backdrop-blur-lg bg-gradient-to-b from-black to-zinc-900" ref={ref}
     style={{
       background: "linear-gradient(to bottom, black, #1a1a1a)",
     }}

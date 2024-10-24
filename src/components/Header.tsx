@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -11,7 +11,7 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  const navRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,34 +25,6 @@ const Header: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-
-    gsap.from(navRef.current, {
-      y:-50,
-      opacity:0,
-      duration:1,
-      dealy:0.3,
-      stagger: 0.2,
-      ease: 'power2.out',
-
-    })
-    gsap.fromTo(navRef.current, 
-      { y: -50, opacity: 0 }, 
-      { 
-        y: 0, 
-        opacity: 1, 
-        duration: 1, 
-        delay: 0.6, 
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: navRef.current,
-          start: 'top top',
-          end: '+=100',
-          scrub: 1,
-        },
-      }
-    );
-  }, []);
 
   const menuVariants = {
     hidden: { opacity: 0, x: '100%' },
@@ -65,7 +37,7 @@ const Header: React.FC = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-lg' : 'bg-transparent'}`}>
-      <div  ref={navRef} className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div  className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center space-x-2 md:ml-11">
           <Cpu className="w-8 h-8 text-purple-400" />
           <span className="text-2xl font-bold text-gradient">Robonauts</span>

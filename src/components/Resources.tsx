@@ -43,7 +43,7 @@ const ResourceCard: React.FC<Resource> = ({ title, type, description }) => {
 
 const ResourcesPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-950 to-black text-purple-50  py-12 px-4 sm:px-6 lg:px-8 sm:pt-14">
+    <div className="min-h-screen   py-12 px-4 sm:px-6 lg:px-8 sm:pt-14"  style={{ background: 'linear-gradient(to bottom, #2c003e, #000000)' }}>
       <RoboticHeader />
       <div className="max-w-7xl mx-auto">
         <motion.h1

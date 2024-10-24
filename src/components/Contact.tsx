@@ -6,7 +6,7 @@ import RoboticHeader from './RoboticHeader'
 
 const RoboticContactPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-950 to-black text-purple-50 py-14 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen  text-purple-50 py-14 px-4 sm:px-6 lg:px-8"  style={{ background: 'linear-gradient(to bottom, #2c003e, #000000)' }}>
       <div className="max-w-4xl mx-auto">
         <RoboticHeader />
         <div className="grid md:grid-cols-2 gap-12">
