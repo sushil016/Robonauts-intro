@@ -42,7 +42,7 @@ const Footer = () => {
       href: "https://www.instagram.com/robonauts_team",
       label: "Instagram",
       color: "hover:text-pink-500",
-      stats: "10K+ Followers",
+      stats: "1K+ Followers",
       description: "Follow our journey"
     },
     {
@@ -50,7 +50,7 @@ const Footer = () => {
       href: "https://github.com/sushil016/Robonauts-intro",
       label: "Github",
       color: "hover:text-neutral-300",
-      stats: "500+ Stars",
+      stats: "5+ Stars",
       description: "View our projects"
     },
     {
@@ -58,7 +58,7 @@ const Footer = () => {
       href: "https://www.linkedin.com/company/robonauts/",
       label: "LinkedIn",
       color: "hover:text-blue-500",
-      stats: "5K+ Network",
+      stats: "1K+ Network",
       description: "Connect with us"
     },
     {
@@ -157,7 +157,7 @@ const Footer = () => {
       <div 
         className="absolute inset-0 opacity-30 pointer-events-none"
         style={{
-          background: `radial-gradient(circle 400px at ${mousePosition.x}px ${mousePosition.y}px, rgba(150, 200, 280, 0.15), transparent)`
+          background: `radial-gradient(circle 250px at ${mousePosition.x}px ${mousePosition.y}px, rgba(150, 500, 280, 0.3), transparent)`
         }}
       />
       <div className="max-w-7xl mx-auto px-4 py-20 relative z-10">

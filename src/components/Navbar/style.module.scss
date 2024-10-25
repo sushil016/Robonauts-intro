@@ -1,0 +1,54 @@
+.header {
+  position: fixed;
+  right: 80px;
+  top: 25px;
+  @media (max-width: 768px) {
+    right: 30px;
+    top: 25px;
+  }
+  .menu {
+    width: 480px;
+    height: 650px;
+    background-color: #bd74fd;
+    border-radius: 25px;
+    position: relative;
+
+    @media (max-width: 768px) {
+      width: 300px;
+      height: 500px;
+      right: 20px;
+      top: 10px;
+    }
+
+    @media (max-width: 480px) {
+      width: 250px;
+      height: 450px;
+      right: 10px;
+      top: 5px;
+    }
+  }
+
+  .linkContainer {
+    font-size: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.75rem;
+    }
+  }
+
+  .footer {
+    font-size: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.75rem;
+    }
+  }
+}

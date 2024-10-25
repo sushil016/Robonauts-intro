@@ -88,7 +88,7 @@ const teamMembers: TeamMember[] = [
     }
   },
   {
-    name: 'Sushil Sahani',
+    name: 'og',
     role: 'Technical Lead',
     image: '/api/placeholder/400/400',
     bio: 'Specialized in embedded systems and computer vision applications.',

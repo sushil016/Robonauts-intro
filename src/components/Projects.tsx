@@ -3,6 +3,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, useScroll } from 'framer-motion';
 import { Camera, Shield, Sword, Video, Image as ImageIcon, Box } from 'lucide-react';
+import ProjectImage from '../assets/robot-Image-1.jpg'
+import ProjectImagetwo from '../assets/projectimage-2.webp'
+import ProjectImagethree from '../assets/projectimagefour.webp'
 import Lenis from '@studio-freight/lenis';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -67,7 +70,7 @@ const Projects = () => {
     {
       title: "Automation Drone",
       description: "Advanced security drone equipped with AI-powered surveillance and real-time threat detection. Featuring 4K thermal imaging and autonomous patrol capabilities.",
-      gradient: "from-slate-950 to-blue-900/20",
+      gradient: "from-zinc-950 to-blue-900/20",
       icons: [
         { icon: Shield, color: "text-blue-400" },
         { icon: Camera, color: "text-blue-400" }
@@ -77,12 +80,12 @@ const Projects = () => {
         { label: 'Flight Time', value: '45min' },
         { label: 'AI Detection', value: '99.9%' }
       ],
-      image: "/api/placeholder/800/600"
+      image: ProjectImage,
     },
     {
       title: "Combat Robot",
       description: "State-of-the-art combat robot designed for competitive battles. Features high-torque motors, reinforced armor, and advanced weapon systems.",
-      gradient: "from-red-950 to-slate-900/20",
+      gradient: "from-indigo-950 to-slate-900/10",
       icons: [
         { icon: Sword, color: "text-red-400" }
       ],
@@ -91,12 +94,12 @@ const Projects = () => {
         { label: 'Weight', value: '250lbs' },
         { label: 'Speed', value: '20mph' }
       ],
-      image: "/api/placeholder/800/600"
+      image: ProjectImagetwo
     },
     {
       title: "Content Creator Drone",
       description: "Professional-grade content creation drone with 8K camera system, 3D scanning capabilities, and advanced stabilization for perfect shots.",
-      gradient: "from-purple-950 to-slate-900/20",
+      gradient: "from-secondary to-slate-900/10",
       icons: [
         { icon: Video, color: "text-purple-400" },
         { icon: ImageIcon, color: "text-purple-400" },
@@ -107,7 +110,7 @@ const Projects = () => {
         { label: 'Stabilization', value: '6-Axis' },
         { label: 'Storage', value: '1TB' }
       ],
-      image: "/api/placeholder/800/600"
+      image:ProjectImagethree
     }
   ];
 
@@ -125,7 +128,7 @@ const Projects = () => {
           >
             <div className="relative h-full w-full">
               {/* Image with gradient overlay */}
-              <div className="absolute inset-0 w-3/5">
+              <div className="absolute inset-0 w-full">
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -137,15 +140,15 @@ const Projects = () => {
 
               {/* Content */}
               <motion.div 
-                className="absolute right-0 w-3/5 h-full flex items-center justify-end pr-24"
+                className="absolute right-0 w-full h-full flex items-center p-24"
                 initial={{ opacity: 0, x: 100 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="max-w-2xl">
+                <div className="max-w-full">
                   {/* Project number */}
                   <motion.span 
-                    className="text-8xl font-bold text-white/10"
+                    className="text-8xl font-bold text-white/20"
                     initial={{ y: 50, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
@@ -155,7 +158,7 @@ const Projects = () => {
 
                   {/* Title */}
                   <motion.h2 
-                    className="text-7xl font-bold text-white mt-4 tracking-tight"
+                    className="text-[8rem] font-bold text-white mt-4 tracking-tight"
                     initial={{ y: 50, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
