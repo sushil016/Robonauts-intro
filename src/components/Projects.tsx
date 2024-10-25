@@ -3,238 +3,212 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, useScroll } from 'framer-motion';
 import { Camera, Shield, Sword, Video, Image as ImageIcon, Box } from 'lucide-react';
-import ProjectSection from './projects/ProjectSection';
-import ParallaxBackground from './projects/ParallaxBackground';
-import DroneModel from './projects/DroneModel';
-import StatsOverlay from './projects/StatsOverlays';
-import BattleBot from './projects/BattleBot';
-import ContentDrone from './projects/ContentDrone';
+import Lenis from '@studio-freight/lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
+import { ReactNode } from "react";
+
+interface ProjectSectionProps {
+  children: ReactNode;
+  className?: string;
+}
+
+const ProjectSection = ({ children, className = "" }: ProjectSectionProps) => (
+  <div className={`relative ${className}`}>{children}</div>
+);
+
 const Projects = () => {
-  const sectionRef = useRef(null);
-  const horizontalContainerRef = useRef<HTMLDivElement | null>(null);
-  const { scrollXProgress } = useScroll({ container: horizontalContainerRef });
+  const containerRef = useRef(null);
+  const horizontalRef = useRef(null);
+  useScroll({ container: horizontalRef });
 
   useEffect(() => {
-    const sections = gsap.utils.toArray(".horizontal-section");
-    const horizontalContainer = horizontalContainerRef.current;
+    // Initialize Lenis
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // direction: 'horizontal',
+      // gestureDirection: 'horizontal',
+      // smooth: true,
+      // smoothTouch: false,
+      touchMultiplier: 2,
+    });
 
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    // GSAP ScrollTrigger setup
+    const sections = gsap.utils.toArray(".project-section");
+    
     gsap.to(sections, {
       xPercent: -100 * (sections.length - 1),
       ease: "none",
       scrollTrigger: {
-        trigger: horizontalContainer,
-        start: "top top",
+        trigger: containerRef.current,
         pin: true,
         scrub: 1,
-        end: () => horizontalContainer ? `+=${horizontalContainer.offsetWidth - window.innerWidth}` : '+=0',
+        snap: 1 / (sections.length - 1),
+        end: () => `+=${window.innerWidth * (sections.length - 1)}`,
         invalidateOnRefresh: true,
       },
     });
 
     return () => {
+      lenis.destroy();
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
 
-  useEffect(() => {
-    const container = horizontalContainerRef.current;
-    if (!container) return;
-
-    let isScrolling = false;
-    let scrollTimeout: number;
-
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      
-      if (!isScrolling) {
-        isScrolling = true;
-        
-        const scrollSpeed = 100;
-        const delta = e.deltaY || e.deltaX;
-        
-        const targetScroll = container.scrollLeft + (delta * scrollSpeed / 100);
-        const startScroll = container.scrollLeft;
-        const startTime = performance.now();
-        const duration = 200;
-
-        const animateScroll = (currentTime: number) => {
-          const elapsed = currentTime - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          
-          const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-          
-          container.scrollLeft = startScroll + (targetScroll - startScroll) * easeProgress;
-
-          if (progress < 1) {
-            requestAnimationFrame(animateScroll);
-          }
-        };
-
-        requestAnimationFrame(animateScroll);
-
-        clearTimeout(scrollTimeout);
-        scrollTimeout = window.setTimeout(() => {
-          isScrolling = false;
-        }, 150);
-      }
-    };
-
-    container.addEventListener('wheel', handleWheel, { passive: false });
-    return () => {
-      container.removeEventListener('wheel', handleWheel);
-      clearTimeout(scrollTimeout);
-    };
-  }, []);
+  const projects = [
+    {
+      title: "Automation Drone",
+      description: "Advanced security drone equipped with AI-powered surveillance and real-time threat detection. Featuring 4K thermal imaging and autonomous patrol capabilities.",
+      gradient: "from-slate-950 to-blue-900/20",
+      icons: [
+        { icon: Shield, color: "text-blue-400" },
+        { icon: Camera, color: "text-blue-400" }
+      ],
+      stats: [
+        { label: 'Range', value: '5km' },
+        { label: 'Flight Time', value: '45min' },
+        { label: 'AI Detection', value: '99.9%' }
+      ],
+      image: "/api/placeholder/800/600"
+    },
+    {
+      title: "Combat Robot",
+      description: "State-of-the-art combat robot designed for competitive battles. Features high-torque motors, reinforced armor, and advanced weapon systems.",
+      gradient: "from-red-950 to-slate-900/20",
+      icons: [
+        { icon: Sword, color: "text-red-400" }
+      ],
+      stats: [
+        { label: 'Power', value: '2000W' },
+        { label: 'Weight', value: '250lbs' },
+        { label: 'Speed', value: '20mph' }
+      ],
+      image: "/api/placeholder/800/600"
+    },
+    {
+      title: "Content Creator Drone",
+      description: "Professional-grade content creation drone with 8K camera system, 3D scanning capabilities, and advanced stabilization for perfect shots.",
+      gradient: "from-purple-950 to-slate-900/20",
+      icons: [
+        { icon: Video, color: "text-purple-400" },
+        { icon: ImageIcon, color: "text-purple-400" },
+        { icon: Box, color: "text-purple-400" }
+      ],
+      stats: [
+        { label: 'Resolution', value: '8K' },
+        { label: 'Stabilization', value: '6-Axis' },
+        { label: 'Storage', value: '1TB' }
+      ],
+      image: "/api/placeholder/800/600"
+    }
+  ];
 
   return (
-    <section ref={sectionRef} className="overflow-hidden">
-      <motion.div 
-        ref={horizontalContainerRef} 
-        className="flex bg-gradient-to-b from-indigo-950 to-black"
-        style={{ width: "300vw" }}
+    <div ref={containerRef} className="h-screen overflow-hidden bg-black">
+      <div 
+        ref={horizontalRef}
+        className="flex h-screen"
+        style={{ width: `${projects.length * 100}vw` }}
       >
-        {/* Security Drone Section */}
-        <ProjectSection className="horizontal-section w-screen h-screen flex-shrink-0 bg-gradient-to-br from-slate-900 to-slate-800">
-          <ParallaxBackground type="security" progress={scrollXProgress} />
-          <motion.div 
-            className="relative z-10 flex items-center justify-center w-screen h-full"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: false, amount: 0.8 }}
-            transition={{ duration: 0.6 }}
+        {projects.map((project, index) => (
+          <ProjectSection 
+            key={index}
+            className="project-section w-screen h-screen flex-shrink-0"
           >
-            <div className="w-4xl sm:w-[70rem] mx-auto flex items-center gap-12 sm:gap-48">
-              <DroneModel className="w-1/2" />
-              <motion.div 
-                className="space-y-6 w-1/2"
-                initial={{ x: 100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <h2 className="text-4xl font-bold text-white tracking-tight">
-                  Automation Drone
-                </h2>
-                <motion.div 
-                  className="flex gap-4"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <Shield className="w-6 h-6 text-blue-400" />
-                  <Camera className="w-6 h-6 text-blue-400" />
-                </motion.div>
-                <p className="text-gray-300 leading-relaxed">
-                  Advanced security drone equipped with AI-powered surveillance and real-time threat detection. 
-                  Featuring 4K thermal imaging and autonomous patrol capabilities.
-                </p>
-                <StatsOverlay 
-                  stats={[
-                    { label: 'Range', value: '5km' },
-                    { label: 'Flight Time', value: '45min' },
-                    { label: 'AI Detection', value: '99.9%' }
-                  ]}
+            <div className="relative h-full w-full">
+              {/* Image with gradient overlay */}
+              <div className="absolute inset-0 w-3/5">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="h-full w-full object-cover"
                 />
-              </motion.div>
-            </div>
-          </motion.div>
-        </ProjectSection>
+                <div className={`absolute inset-0 bg-gradient-to-r ${project.gradient}`} />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black translate-x-[80%]" />
+              </div>
 
-        {/* Battlebots Section */}
-        <ProjectSection className="horizontal-section w-screen h-screen flex-shrink-0 bg-gradient-to-br from-red-900 to-slate-900">
-          <ParallaxBackground type="battle" progress={scrollXProgress} />
-          <motion.div 
-            className="relative z-10 flex items-center justify-center w-screen h-full"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: false, amount: 0.8 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="max-w-4xl mx-auto px-6 flex items-center gap-12">
+              {/* Content */}
               <motion.div 
-                className="space-y-6 w-1/2"
-                initial={{ x: -100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                className="absolute right-0 w-3/5 h-full flex items-center justify-end pr-24"
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
               >
-                <h2 className="text-4xl font-bold text-white tracking-tight">
-                  Combat Robot
-                </h2>
-                <motion.div 
-                  className="flex gap-4"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <Sword className="w-6 h-6 text-red-400" />
-                </motion.div>
-                <p className="text-gray-300 leading-relaxed">
-                  State-of-the-art combat robot designed for competitive battles. 
-                  Features high-torque motors, reinforced armor, and advanced weapon systems.
-                </p>
-                <StatsOverlay 
-                  stats={[
-                    { label: 'Power', value: '2000W' },
-                    { label: 'Weight', value: '250lbs' },
-                    { label: 'Speed', value: '20mph' }
-                  ]}
-                />
-              </motion.div>
-              <BattleBot className="w-1/2" />
-            </div>
-          </motion.div>
-        </ProjectSection>
+                <div className="max-w-2xl">
+                  {/* Project number */}
+                  <motion.span 
+                    className="text-8xl font-bold text-white/10"
+                    initial={{ y: 50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </motion.span>
 
-        {/* Content Creation Section */}
-        <ProjectSection className="horizontal-section w-screen h-screen flex-shrink-0 bg-gradient-to-br from-purple-900 to-slate-900">
-          <ParallaxBackground type="content" progress={scrollXProgress} />
-          <motion.div 
-            className="relative z-10 flex items-center justify-center w-screen h-full"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: false, amount: 0.8 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="max-w-4xl mx-auto px-6 flex items-center gap-12">
-              <ContentDrone className="w-1/2" />
-              <motion.div 
-                className="space-y-6 w-1/2"
-                initial={{ x: 100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <h2 className="text-4xl font-bold text-white tracking-tight">
-                  Content Creator Drone
-                </h2>
-                <motion.div 
-                  className="flex gap-4"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <Video className="w-6 h-6 text-purple-400" />
-                  <ImageIcon className="w-6 h-6 text-purple-400" />
-                  <Box className="w-6 h-6 text-purple-400" />
-                </motion.div>
-                <p className="text-gray-300 leading-relaxed">
-                  Professional-grade content creation drone with 8K camera system, 
-                  3D scanning capabilities, and advanced stabilization for perfect shots.
-                </p>
-                <StatsOverlay 
-                  stats={[
-                    { label: 'Resolution', value: '8K' },
-                    { label: 'Stabilization', value: '6-Axis' },
-                    { label: 'Storage', value: '1TB' }
-                  ]}
-                />
+                  {/* Title */}
+                  <motion.h2 
+                    className="text-7xl font-bold text-white mt-4 tracking-tight"
+                    initial={{ y: 50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                  >
+                    {project.title}
+                  </motion.h2>
+
+                  {/* Icons */}
+                  <motion.div 
+                    className="flex gap-6 mt-8"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                  >
+                    {project.icons.map((IconObj, i) => (
+                      <IconObj.icon 
+                        key={i}
+                        className={`w-8 h-8 ${IconObj.color}`}
+                      />
+                    ))}
+                  </motion.div>
+
+                  {/* Description */}
+                  <motion.p 
+                    className="text-gray-400 text-lg mt-8 leading-relaxed max-w-xl"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                  >
+                    {project.description}
+                  </motion.p>
+
+                  {/* Stats */}
+                  <motion.div 
+                    className="grid grid-cols-3 gap-8 mt-12"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                  >
+                    {project.stats.map((stat, i) => (
+                      <div key={i} className="text-center">
+                        <div className="text-3xl font-bold text-white">{stat.value}</div>
+                        <div className="text-sm text-gray-500 mt-1">{stat.label}</div>
+                      </div>
+                    ))}
+                  </motion.div>
+                </div>
               </motion.div>
             </div>
-          </motion.div>
-        </ProjectSection>
-      </motion.div>
-    </section>
+          </ProjectSection>
+        ))}
+      </div>
+    </div>
   );
 };
 
