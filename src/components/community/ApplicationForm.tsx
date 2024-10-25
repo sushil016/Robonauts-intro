@@ -32,7 +32,7 @@ const ApplicationForm = () => {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('/api/applications', {
+      const response = await fetch('http://localhost:3000/api/applications', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -183,7 +183,7 @@ const ApplicationForm = () => {
             {/* Previous Project */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
-                Previous Projects
+                Previous Projects or Skills {"(if any)"}
               </label>
               <textarea
                 name="previousProject"
@@ -207,7 +207,7 @@ const ApplicationForm = () => {
                 value={formData.interests}
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-zinc-700/50 border border-cyan-500/10 text-white focus:outline-none focus:border-cyan-500 transition-colors"
-                placeholder="e.g. Robotics , AI , Programming , Web Devlopment , Mechanical Design."
+                placeholder="e.g. Electronics , Programming , Web Devlopment , Mechanical Design , AI , ML , IoT , etc."
               />
             </div>
 

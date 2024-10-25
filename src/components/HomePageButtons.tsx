@@ -134,7 +134,7 @@ const HomePageButton: FC = () => {
   return (
     <div className="relative w-full h-full bg-transparent overflow-hidden">
       <StarryBackground />
-      <div className="absolute inset-0 flex items-end justify-center sm:space-x-48 space-x-4 mb-16">
+      <div className="absolute inset-0 flex items-end justify-center sm:space-x-48 space-x-4 sm:mb-20 mb-32 ">
         <Card
           onClick={resClickHandeler}
           title="Resources"

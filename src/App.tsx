@@ -12,6 +12,7 @@ import LandingPage from './components/Landingpage';
 import TeamMembers from './components/TeamMembers';
 import Projects from './components/Projects';
 import ApplicationForm from './components/community/ApplicationForm';
+import AdminDashboard from './components/community/AdminDashboard';
 
 
 
@@ -58,6 +59,7 @@ function App() {
           <Route path="/resources" element={<Resources/>} />
           <Route path="/contact" element={<Contact  />} />
           <Route path="/community" element={<ApplicationForm  />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
         
         <Footer  />
