@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from 'react';
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { ChevronDown, Wrench, Rocket, Trophy, Users, Zap, ArrowRight, Star } from 'lucide-react';
 import HomePageButton from './HomePageButtons';
+import './LandingPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const activities = [
   { 
@@ -65,6 +67,8 @@ export default function LandingPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+
+  const navigate = useNavigate();
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -140,26 +144,26 @@ export default function LandingPage() {
 
         {/* Animated Particles */}
         <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
+            {[...Array(1)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 bg-cyan-400 rounded-full"
               animate={{
-                x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-                y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
-                opacity: [0, 1, 0],
+              x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth],
+              y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
+              opacity: [0, 1, 0],
               }}
               transition={{
-                duration: Math.random() * 5 + 5,
-                repeat: Infinity,
-                ease: "linear",
+              duration: Math.random() * 5 + 5,
+              repeat: Infinity,
+              ease: "linear",
               }}
             />
-          ))}
+            ))}
         </div>
 
         <motion.div 
-          className="absolute inset-0 flex flex-col items-center justify-center sm:mt-48"
+          className="absolute inset-0 flex flex-col items-center justify-center"
           style={{
             translateX: mousePosition.x,
             translateY: mousePosition.y + scrollY * 0.3,
@@ -209,8 +213,9 @@ export default function LandingPage() {
             <ChevronDown className="w-12 h-12 text-white" />
             
           </motion.div>
-          <HomePageButton />
+          
         </motion.div>
+        <HomePageButton />
       </div>
 
       {/* Activities Section */}
@@ -337,7 +342,7 @@ export default function LandingPage() {
             transition={{ delay: 0.8 }}
             className="mt-12 text-center"
           >
-            <button className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300">
+            <button onClick={()=> navigate('/community')} className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300">
               Join Our Community
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>

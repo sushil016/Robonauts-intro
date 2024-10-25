@@ -11,6 +11,7 @@ import RobotMascot from './components/RobotMascotProps';
 import LandingPage from './components/Landingpage';
 import TeamMembers from './components/TeamMembers';
 import Projects from './components/Projects';
+import ApplicationForm from './components/community/ApplicationForm';
 
 
 
@@ -56,6 +57,7 @@ function App() {
           <Route path="/courses" element={<CoursesAndWorkshops  />} />
           <Route path="/resources" element={<Resources/>} />
           <Route path="/contact" element={<Contact  />} />
+          <Route path="/community" element={<ApplicationForm  />} />
         </Routes>
         
         <Footer  />
