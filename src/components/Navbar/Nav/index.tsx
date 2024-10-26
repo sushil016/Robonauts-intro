@@ -9,7 +9,7 @@ export default function Indextwo() {
     <div className={styles.nav}>
       <div className={styles.body}>
         {links.map((link, i) => {
-          const { title, href } = link;
+          const { title, to } = link;
           return (
             <div key={`b_${i}`} className={styles.linkContainer}>
               <motion.div
@@ -20,7 +20,7 @@ export default function Indextwo() {
                 exit="exit"
                 whileHover={{ scale: 1.1 }}
               >
-                <a href={href}>{title}</a>
+                <a href={to}>{title}</a>
               </motion.div>
             </div>
           );

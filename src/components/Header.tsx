@@ -64,8 +64,8 @@ const Header: React.FC = () => {
             <li><a href="#projects" className="hover:text-purple-400 transition-colors">Projects</a></li>
             <li><a href="#team" className="hover:text-purple-400 transition-colors">Team</a></li>
             <li><a href="#events" className="hover:text-purple-400 transition-colors">Events</a></li>
-            {/* <li><Link to="/courses" className="hover:text-purple-400 transition-colors">Courses</Link></li>
-            <li><Link to="/resources" className="hover:text-purple-400 transition-colors">Resources</Link></li>
+            <li><Link to="/admin/dashboard" className="hover:text-purple-400 transition-colors">Dashboard</Link></li>
+            {/* <li><Link to="/resources" className="hover:text-purple-400 transition-colors">Resources</Link></li>
             <li><Link to="/contact" className="hover:text-purple-400 transition-colors">Contact</Link></li> */}
             <Index />
           </ul>

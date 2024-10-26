@@ -22,7 +22,7 @@ export const links = [
   
         title: "Resourses",
   
-        href: "/resources"
+        to: "/resources"
   
     },
   
@@ -30,7 +30,7 @@ export const links = [
   
         title: "Documentation",
   
-        href: "/courses"
+        to: "/courses"
   
     },
   
@@ -38,18 +38,15 @@ export const links = [
   
         title: "Contact Us",
   
-        href: "/contact"
+        to: "/contact"
   
     },
 
-    {
-        title : "About Us",
-        href: "/"
-    },
+
 
     {
         title: "Join Our Club",
-        href:"/community"
+        to:"/community"
     }
   
   
