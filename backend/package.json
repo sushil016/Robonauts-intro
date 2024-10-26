@@ -11,11 +11,14 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "^5.21.1",
+    "class-variance-authority": "^0.7.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "winston": "^3.15.0"
   },
   "devDependencies": {
+    "@types/winston": "^2.4.4",
     "prisma": "^5.21.1"
   }
 }

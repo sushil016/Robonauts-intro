@@ -47,6 +47,11 @@ export const links = [
     {
         title: "Join Our Club",
         to:"/community"
+    },
+
+    {
+        title: "Members",
+        to:"/member"
     }
   
   
