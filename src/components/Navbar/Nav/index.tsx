@@ -12,26 +12,28 @@ export default function Indextwo() {
           const { title, to } = link;
           return (
             <div key={`b_${i}`} className={styles.linkContainer}>
-              <motion.div
-                custom={i}
-                variants={perspective}
-                initial="initial"
-                animate="enter"
-                exit="exit"
-                whileHover={{ scale: 1.1 }}
-              >
-                <a href={to}>{title}</a>
-              </motion.div>
+                <motion.div
+                  custom={i}
+                  variants={perspective}
+                  initial="initial"
+                  animate="enter"
+                  exit="exit"
+                  style={{ originX: 0.5 }} 
+                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ y: -5 }} // Adjust the y-axis on hover
+                >
+                  <a href={to}>{title}</a>
+                </motion.div>
             </div>
           );
         })}
       </div>
       <motion.div className={styles.footer}>
-      <div className="flex flex-wrap justify-center items-center gap-8 mt-5">
-            {footerLinks.map((link, index) => (
-              <SocialLink key={index} link={{ ...link, icon: link.icon}} />
-            ))}
-          </div>
+        <div className="grid grid-cols-2 gap-8 mt-5">
+          {footerLinks.map((link, index) => (
+        <SocialLink key={index} link={{ ...link, icon: link.icon }} />
+          ))}
+        </div>
       </motion.div>
     </div>
   );

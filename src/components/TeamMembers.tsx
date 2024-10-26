@@ -315,7 +315,7 @@ const TeamMembers = () => {
   });
 
   return (
-    <section className="py-24 min-h-screen bg-black/80 backdrop-blur-lg relative overflow-hidden">
+    <section id='team' className="py-24 min-h-screen bg-black/80 backdrop-blur-lg relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"

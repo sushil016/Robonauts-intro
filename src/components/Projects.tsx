@@ -115,7 +115,7 @@ const Projects = () => {
   ];
 
   return (
-    <div ref={containerRef} className="h-screen overflow-hidden bg-black">
+    <div ref={containerRef} id="projects" className="h-screen overflow-hidden bg-black">
       <div 
         ref={horizontalRef}
         className="flex h-screen"

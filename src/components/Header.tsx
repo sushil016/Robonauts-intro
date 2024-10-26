@@ -30,14 +30,14 @@ const Header: React.FC = () => {
   }, []);
 
 
-  const menuVariants = {
-    hidden: { opacity: 0, x: '100%' },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
-  };
+  // const menuVariants = {
+  //   hidden: { opacity: 0, x: '100%' },
+  //   visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  // };
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  // const closeMenu = () => {
+  //   setIsMenuOpen(false);
+  // };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-lg' : 'bg-transparent'}`}>
@@ -73,11 +73,11 @@ const Header: React.FC = () => {
         <motion.nav
           // className={`fixed top-0 right-0 h-full w-3/4 bg-gradient-to-b from-indigo-950 to-black text-purple-300 shadow-lg md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}
           // initial="hidden"
-          // animate={isMenuOpen ? 'visible' : 'hidden'}
-          variants={menuVariants}
+          // // animate={isMenuOpen ? 'visible' : 'hidden'}
+          // variants={menuVariants}
         >
           
-          <div className="flex justify-end p-4">
+          {/* <div className="flex justify-end p-4">
             <button
               className="text-white"
               onClick={closeMenu}
@@ -87,7 +87,7 @@ const Header: React.FC = () => {
                 <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-          </div>
+          </div> */}
           {/* <ul className="flex flex-col space-y-4 p-4">
             <li><Link to="/" className="hover:text-purple-400 transition-colors" onClick={closeMenu}>Home</Link></li>
             <li><a href="#projects" className="hover:text-purple-400 transition-colors" onClick={closeMenu}>Projects</a></li>
