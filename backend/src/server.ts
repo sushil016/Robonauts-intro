@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import winston from 'winston';
 import cors from 'cors';
-
+import handleroute from './Routes/route'
 const prisma = new PrismaClient();
 const app = express();
 
@@ -24,25 +24,31 @@ if (process.env.NODE_ENV !== 'production') {
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/admin', handleroute);
+
 // Input validation middleware
-const validateMemberInput = (req: Request, res: Response, next: NextFunction) => {
+const validateMemberInput = (req: Request, res: Response, next: NextFunction): void => {
   const { department, domain, subgroup, name, email, phone, yearOfStudy } = req.body;
 
   if (!department || !domain || !subgroup || !name || !email || !phone || !yearOfStudy) {
-    return res.status(400).json({ error: 'All fields are required' });
+    res.status(400).json({ error: 'All fields are required' });
+    return;
   }
 
   // Email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    return res.status(400).json({ error: 'Invalid email format' });
+    res.status(400).json({ error: 'Invalid email format' });
+    return;
   }
 
   // Phone validation
-  const phoneRegex = /^\d{10}$/;
+  const phoneRegex = /^\d{10}$/; // Example phone validation regex
   if (!phoneRegex.test(phone)) {
-    return res.status(400).json({ error: 'Invalid phone number format' });
+    res.status(400).json({ error: 'Invalid phone number format' });
+    return;
   }
+
 
   next();
 };
@@ -148,7 +154,7 @@ app.get('/api/applications', async (req: Request, res: Response) => {
 //   }
 // });
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, req: Request, res: Response) => {
   logger.error('Unhandled error', { error: err.message });
   res.status(500).json({ 
     error: 'An unexpected error occurred' 

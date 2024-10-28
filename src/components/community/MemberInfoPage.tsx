@@ -4,23 +4,60 @@ import {
   CardContent, 
   CardHeader, 
   CardTitle 
-} from '@/components/ui/card';
+} from '../ui/card';
 import { 
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
+} from "../ui/select";
+
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import Input from '../ui/input';
 
-const AdminDashboard = () => {
-  const [members, setMembers] = useState([]);
-  const [statistics, setStatistics] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({
+interface Member {
+  id: number;
+  name: string;
+  department: string;
+  domain: string;
+  subgroup: string;
+  yearOfStudy: string;
+  email: string;
+  phone: string;
+}
+
+interface Statistics {
+  totalMembers: number;
+  departmentStats: { department: string; _count: number }[];
+  domainStats: { domain: string; _count: number }[];
+  yearStats: { yearOfStudy: string; _count: number }[];
+}
+
+interface Filters {
+  department: string;
+  domain: string;
+  subgroup: string;
+  yearOfStudy: string;
+  search: string;
+  page: number;
+  limit: number;
+  sortBy: string;
+  sortOrder: string;
+}
+
+interface Pagination {
+  total: number;
+  pages: number;
+  currentPage: number;
+}
+
+const AdminDashboardMember: React.FC = () => {
+  const [members, setMembers] = useState<Member[]>([]);
+  const [statistics, setStatistics] = useState<Statistics | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [filters, setFilters] = useState<Filters>({
     department: '',
     domain: '',
     subgroup: '',
@@ -31,7 +68,7 @@ const AdminDashboard = () => {
     sortBy: 'createdAt',
     sortOrder: 'desc'
   });
-  const [pagination, setPagination] = useState({
+  const [pagination, setPagination] = useState<Pagination>({
     total: 0,
     pages: 0,
     currentPage: 1
@@ -46,7 +83,7 @@ const AdminDashboard = () => {
         limit: filters.limit.toString()
       });
 
-      const response = await fetch(`/api/admin/members?${queryParams}`, {
+      const response = await fetch(`http://localhost:3000/api/admin/members?${queryParams}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
         }
@@ -65,7 +102,7 @@ const AdminDashboard = () => {
   // Fetch statistics
   const fetchStatistics = async () => {
     try {
-      const response = await fetch('/api/admin/statistics', {
+      const response = await fetch('http://localhost:3000/api/admin/statistics', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
         }
@@ -81,6 +118,8 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
+    console.log(loading);
+    
     const loadData = async () => {
       setLoading(true);
       await Promise.all([fetchMembers(), fetchStatistics()]);
@@ -91,7 +130,7 @@ const AdminDashboard = () => {
   }, [filters]);
 
   // Handle filter changes
-  const handleFilterChange = (key, value) => {
+  const handleFilterChange = (key: keyof Filters, value: string | number) => {
     setFilters(prev => ({
       ...prev,
       [key]: value,
@@ -100,7 +139,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 py-20 " style={{ background: 'linear-gradient(to bottom, #2c003e, #000000)' }}>
       {/* Statistics Cards */}
       {statistics && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -201,9 +240,9 @@ const AdminDashboard = () => {
           <CardTitle>Members List</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="relative overflow-x-auto">
+          <div className="relative overflow-x-auto rounded-lg">
             <table className="w-full text-sm text-left">
-              <thead className="text-xs uppercase bg-gray-50">
+              <thead className="text-xs uppercase bg-zinc-700">
                 <tr>
                   <th scope="col" className="px-6 py-3 font-medium">Name</th>
                   <th scope="col" className="px-6 py-3 font-medium">Department</th>
@@ -216,7 +255,7 @@ const AdminDashboard = () => {
               </thead>
               <tbody>
                 {members.map((member) => (
-                  <tr key={member.id} className="bg-white border-b hover:bg-gray-50">
+                  <tr key={member.id} className="bg-zinc-950/10 border-b hover:bg-zinc-900">
                     <td className="px-6 py-4">{member.name}</td>
                     <td className="px-6 py-4">{member.department}</td>
                     <td className="px-6 py-4">{member.domain}</td>
@@ -239,14 +278,14 @@ const AdminDashboard = () => {
               <button
                 onClick={() => handleFilterChange('page', filters.page - 1)}
                 disabled={filters.page === 1}
-                className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50"
+                className="p-2 rounded-md hover:bg-black disabled:opacity-50"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
               <button
                 onClick={() => handleFilterChange('page', filters.page + 1)}
                 disabled={filters.page === pagination.pages}
-                className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50"
+                className="p-2 rounded-md hover:bg-black disabled:opacity-50"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
@@ -258,4 +297,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default AdminDashboardMember;

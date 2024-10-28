@@ -14,6 +14,7 @@ import Projects from './components/Projects';
 import ApplicationForm from './components/community/ApplicationForm';
 import AdminDashboard from './components/community/AdminDashboard';
 import ClubMembershipForm from './components/community/MemberDetails';
+import AdminDashboardMember from './components/community/MemberInfoPage';
 
 
 
@@ -62,7 +63,7 @@ function App() {
           <Route path="/community" element={<ApplicationForm  />} />
           <Route path="/member" element={<ClubMembershipForm  />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/member" element={<AdminDashboard/>} />
+          <Route path="/admin/member" element={<AdminDashboardMember/>} />
         </Routes>
         
         <Footer  />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { AlertCircle, Check } from 'lucide-react';
+import { AlertCircle, Check, Loader2, Send } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { 
   Card, 
   CardHeader, 
@@ -77,7 +78,7 @@ const ClubMembershipForm = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/members', {
+      const response = await fetch('http://localhost:3000/api/members', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,7 +106,8 @@ const ClubMembershipForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto my-32 bg-secondary ">
+    <div  className="min-h-screen bg-zinc py-20 px-4"  style={{ background: 'linear-gradient(to bottom, #2c003e, #000000)' }}>
+       <Card className="w-full max-w-2xl mx-auto   bg-zinc-800/50 backdrop-blur-sm rounded-xl p-8 border border-cyan-500/10"   >
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center">
           Club Membership Application
@@ -115,12 +117,12 @@ const ClubMembershipForm = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Department Selection */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium">Department</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Department</label>
             <Select
               value={formData.department}
               onValueChange={(value) => setFormData({...formData, department: value})}
             >
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="w-full px-4 py-2 rounded-lg bg-zinc-700/50 border border-cyan-500/10 text-white focus:outline-none focus:border-cyan-500 transition-colors">
                 <SelectValue placeholder="Select Department" />
               </SelectTrigger>
               <SelectContent>
@@ -138,14 +140,14 @@ const ClubMembershipForm = () => {
 
           {/* Domain Selection */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium">Domain</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Domain</label>
             <Select
               value={formData.domain}
               onValueChange={(value) => {
                 setFormData({...formData, domain: value, subgroup: ''});
               }}
             >
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="w-full px-4 py-2 rounded-lg bg-zinc-700/50 border border-cyan-500/10 text-white focus:outline-none focus:border-cyan-500 transition-colors">
                 <SelectValue placeholder="Select Domain" />
               </SelectTrigger>
               <SelectContent>
@@ -164,12 +166,12 @@ const ClubMembershipForm = () => {
           {/* Subgroup Selection */}
           {formData.domain && (
             <div className="space-y-2">
-              <label className="block text-sm font-medium">Subgroup</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Subgroup</label>
               <Select
                 value={formData.subgroup}
                 onValueChange={(value) => setFormData({...formData, subgroup: value})}
               >
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full px-4 py-2 rounded-lg bg-zinc-700/50 border border-cyan-500/10 text-white focus:outline-none focus:border-cyan-500 transition-colors">
                   <SelectValue placeholder="Select Subgroup" />
                 </SelectTrigger>
                 <SelectContent>
@@ -189,12 +191,12 @@ const ClubMembershipForm = () => {
           {/* Personal Information */}
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium">Name</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
               <input
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                className="mt-1 block w-full rounded-md border border-neutral-400 px-3 py-2 bg-secondary"
+                className="w-full px-4 py-2 rounded-lg bg-zinc-700/50 border border-cyan-500/10 text-white focus:outline-none focus:border-cyan-500 transition-colors"
               />
               {errors.name && (
                 <p className="text-red-500 text-sm">{errors.name}</p>
@@ -202,12 +204,12 @@ const ClubMembershipForm = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium">Email</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
-                className="mt-1 block w-full rounded-md border border-gray-400 px-3 py-2 bg-secondary"
+                className="w-full px-4 py-2 rounded-lg bg-zinc-700/50 border border-cyan-500/10 text-white focus:outline-none focus:border-cyan-500 transition-colors"
               />
               {errors.email && (
                 <p className="text-red-500 text-sm">{errors.email}</p>
@@ -215,12 +217,12 @@ const ClubMembershipForm = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium">Phone Number</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
               <input
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                className="mt-1 block w-full rounded-md border border-gray-400 px-3 py-2 bg-secondary"
+                className="w-full px-4 py-2 rounded-lg bg-zinc-700/50 border border-cyan-500/10 text-white focus:outline-none focus:border-cyan-500 transition-colors"
               />
               {errors.phone && (
                 <p className="text-red-500 text-sm">{errors.phone}</p>
@@ -228,12 +230,12 @@ const ClubMembershipForm = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium">Year of Study</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Year of Study</label>
               <Select
                 value={formData.yearOfStudy}
                 onValueChange={(value) => setFormData({...formData, yearOfStudy: value})}
               >
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full px-4 py-2 rounded-lg bg-zinc-700/50 border border-cyan-500/10 text-white focus:outline-none focus:border-cyan-500 transition-colors">
                   <SelectValue placeholder="Select Year" />
                 </SelectTrigger>
                 <SelectContent>
@@ -251,13 +253,22 @@ const ClubMembershipForm = () => {
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:bg-blue-400"
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit Application'}
-          </button>
+          <motion.button
+              type="submit"
+              disabled={isSubmitting}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {isSubmitting ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <>
+                  <Send className="w-5 h-5" />
+                  Submit Application
+                </>
+              )}
+            </motion.button>
 
           {/* Success Message */}
           {submitSuccess && (
@@ -281,6 +292,7 @@ const ClubMembershipForm = () => {
         </form>
       </CardContent>
     </Card>
+    </div>
   );
 };
 

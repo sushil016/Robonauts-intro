@@ -23,12 +23,18 @@ router.get('/members', async (req: Request, res: Response) => {
     const skip = (Number(page) - 1) * Number(limit);
 
     // Build filter conditions
-    const where: any = {};
+    const where: {
+      department?: string;
+      domain?: string;
+      subgroup?: string;
+      yearOfStudy?: string;
+      OR?: ({ name?: { contains: string, mode: 'insensitive' } } | { email?: { contains: string, mode: 'insensitive' } })[];
+    } = {};
 
-    if (department) where.department = department;
-    if (domain) where.domain = domain;
-    if (subgroup) where.subgroup = subgroup;
-    if (yearOfStudy) where.yearOfStudy = yearOfStudy;
+    if (department) where.department = department as string;
+    if (domain) where.domain = domain as string;
+    if (subgroup) where.subgroup = subgroup as string;
+    if (yearOfStudy) where.yearOfStudy = yearOfStudy as string;
     
     // Search across name and email
     if (search) {
@@ -66,21 +72,21 @@ router.get('/members', async (req: Request, res: Response) => {
   }
 });
 
-router.get('/members/:id', async (req: Request, res: Response) => {
-  try {
-    const member = await prisma.member.findUnique({
-      where: { id: Number(req.params.id) }
-    });
+// router.get('/members/:id', async (req: Request, res: Response) => {
+//   try {
+//     const member = await prisma.member.findUnique({
+//       where: { id: Number(req.params.id) }
+//     });
 
-    if (!member) {
-      return res.status(404).json({ error: 'Member not found' });
-    }
+//     if (!member) {
+//       return res.status(404).json({ error: 'Member not found' });
+//     }
 
-    res.json(member);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch member details' });
-  }
-});
+//     res.json(member);
+//   } catch (error) {
+//     res.status(500).json({ error:error,});
+//   }
+// });
 
 // Get summary statistics
 router.get('/statistics', async (req: Request, res: Response) => {
@@ -109,7 +115,7 @@ router.get('/statistics', async (req: Request, res: Response) => {
       yearStats
     });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch statistics' });
+    res.status(500).json({ error: error, });
   }
 });
 
