@@ -107,7 +107,12 @@ function App() {
               <LandingPage />
               {/* <ClubOverview  /> */}
               {/* <Meteor/> */}
-              <Projects/>
+              <Projects
+               bgVariant={bgVariant}
+               setBgVariant={setBgVariant}
+               cursorText={cursorText}
+               setCursorText={setCursorText}
+              />
               <TeamMembers />
               <EventsAndCompetitions/>
               {/* <ExploreButtons /> */}

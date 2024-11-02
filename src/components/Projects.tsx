@@ -15,13 +15,28 @@ import { ReactNode } from "react";
 interface ProjectSectionProps {
   children: ReactNode;
   className?: string;
+
+  bgVariant: string;
+
+  setBgVariant: React.Dispatch<React.SetStateAction<string>>;
+
+  cursorText: string;
+
+  setCursorText: React.Dispatch<React.SetStateAction<string>>;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
 }
 
-const ProjectSection = ({ children, className = "" }: ProjectSectionProps) => (
-  <div className={`relative ${className}`}>{children}</div>
+const ProjectSection = ({ children, className = "", onMouseEnter, onMouseLeave }: ProjectSectionProps) => (
+  <div className={`relative ${className}`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>{children}</div>
 );
 
-const Projects = () => {
+interface ProjectsProps {
+  setBgVariant: React.Dispatch<React.SetStateAction<string>>;
+  setCursorText: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Projects = ({ setBgVariant, setCursorText, }: ProjectsProps) => {
   const containerRef = useRef(null);
   const horizontalRef = useRef(null);
   useScroll({ container: horizontalRef });
@@ -114,6 +129,15 @@ const Projects = () => {
     }
   ];
 
+  function mouseEnter() {
+   setCursorText('View Project');
+  }
+
+  function mouseLeave() {
+    setBgVariant("default");
+    setCursorText('');
+  }
+
   return (
     <div ref={containerRef} id="projects" className="h-screen overflow-hidden bg-black">
       <div 
@@ -123,8 +147,14 @@ const Projects = () => {
       >
         {projects.map((project, index) => (
           <ProjectSection 
-            key={index}
-            className="project-section w-screen h-screen flex-shrink-0"
+          onMouseEnter={mouseEnter}
+          onMouseLeave={mouseLeave}
+          key={index}
+          className="project-section w-screen h-screen flex-shrink-0"
+          bgVariant={project.gradient}
+          setBgVariant={setBgVariant}
+          cursorText="View Project"
+          setCursorText={setCursorText}
           >
             <div className="relative h-full w-full">
               {/* Image with gradient overlay */}
