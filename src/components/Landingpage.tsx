@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { ChevronDown, Wrench, Rocket, Trophy, Users, Zap, ArrowRight, Star } from 'lucide-react';
-import HomePageButton from './HomePageButtons';
-import './LandingPage.css';
+import { StarryBackground } from './ui/StarryBackground';
+  import './LandingPage.css';
 import { Link } from 'react-router-dom';
+import useMousePosition from './hooks/mousePosition';
 
 const activities = [
   { 
@@ -65,8 +66,7 @@ export default function LandingPage() {
   const controls = useAnimation();
   const activitiesRef = useRef<HTMLDivElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
+  const { x, y } = useMousePosition();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,18 +80,9 @@ export default function LandingPage() {
       }
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 20,
-        y: (e.clientY / window.innerHeight) * 20,
-      });
-    };
-
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [controls]);
 
@@ -118,10 +109,18 @@ export default function LandingPage() {
     }
   };
 
+  // Calculate normalized mouse position for parallax effect
+  const normalizedMousePosition = {
+    x: (x / window.innerWidth) * 20,
+    y: (y / window.innerHeight) * 20,
+  };
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-black">
       {/* Hero Section */}
+    
       <div className="h-screen relative overflow-hidden">
+   
         <motion.div 
           className="absolute inset-0 bg-gradient-to-b from-black to-zinc-900"
           style={{
@@ -158,14 +157,16 @@ export default function LandingPage() {
               ease: "linear",
               }}
             />
+            
             ))}
+           <StarryBackground />
         </div>
 
         <motion.div 
           className="absolute inset-0 flex flex-col items-center justify-center"
           style={{
-            translateX: mousePosition.x,
-            translateY: mousePosition.y + scrollY * 0.3,
+            translateX: normalizedMousePosition.x,
+            translateY: normalizedMousePosition.y + scrollY * 0.3,
             transition: 'transform 0.2s ease-out',
           }}
         >
@@ -214,7 +215,8 @@ export default function LandingPage() {
           </motion.div>
           
         </motion.div>
-        <HomePageButton />
+      
+        {/* <HomePageButton /> */}
       </div>
 
       {/* Activities Section */}

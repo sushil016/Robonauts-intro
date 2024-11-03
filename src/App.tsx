@@ -108,9 +108,7 @@ function App() {
               {/* <ClubOverview  /> */}
               {/* <Meteor/> */}
               <Projects
-               bgVariant={bgVariant}
                setBgVariant={setBgVariant}
-               cursorText={cursorText}
                setCursorText={setCursorText}
               />
               <TeamMembers />

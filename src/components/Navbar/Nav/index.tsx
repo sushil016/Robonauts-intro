@@ -29,7 +29,7 @@ export default function Indextwo() {
         })}
       </div>
       <motion.div className={styles.footer}>
-        <div className="grid grid-cols-2 gap-8 mt-5">
+        <div className="grid grid-cols-2 gap-8">
           {footerLinks.map((link, index) => (
         <SocialLink key={index} link={{ ...link, icon: link.icon }} />
           ))}

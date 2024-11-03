@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Linkedin, Mail, Twitter, ChevronRight } from 'lucide-react';
+import useMousePosition from './hooks/mousePosition';
 
 // Enhanced intersection observer hook with more options and better performance
 const useInView = (options = {
@@ -314,12 +315,22 @@ const TeamMembers = () => {
     freezeOnceVisible: true
   });
 
+  const { x, y } = useMousePosition();
+  // Calculate normalized mouse position for effects
+  // const normalizedMousePosition = {
+  //   x: (x / window.innerWidth) * 100,
+  //   y: (y / window.innerHeight) * 100
+  // };
+  // This calculation is currently not used but might be needed in future iterations
+
   return (
     <section id='team' className="py-24 min-h-screen bg-black/80 backdrop-blur-lg relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"
           animate={{
+            x: x * 0.05,
+            y: y * 0.05,
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3]
           }}

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Instagram, ArrowUp, Linkedin, Github, Mail, Star, Heart } from 'lucide-react';
+import useMousePosition from './hooks/mousePosition';
 
 interface Link {
   icon: JSX.Element;
@@ -16,9 +17,8 @@ interface SocialLinkProps {
 }
 
 const Footer = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
-  const [hoveredLink, setHoveredLink] = useState<number | null>(null);
+  const { x, y } = useMousePosition();
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -28,13 +28,81 @@ const Footer = () => {
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const Tooltip = ({ isVisible, stats, description }: { isVisible: boolean, stats: string, description: string }) => (
+    <div
+      className={`
+        absolute left-1 -translate-x-1/2
+        w-max px-4 py-2
+        bg-black/90 backdrop-blur-xl
+        rounded-lg border border-white/20
+        transition-all duration-300 ease-out
+        ${isVisible 
+          ? 'opacity-100 -top-20 transform-none' 
+          : 'opacity-0 -top-16 translate-y-2 pointer-events-none'
+        }
+        shadow-[0_8px_32px_rgba(0,0,0,0.2)]
+      `}
+    >
+      <div className="text-center whitespace-nowrap">
+        <p className="text-white font-medium text-sm mb-1">{stats}</p>
+        <p className="text-white/60 text-xs">{description}</p>
+      </div>
+      <div className="
+        absolute left-1/2 -translate-x-1/2 bottom-[-8px]
+        w-4 h-4 rotate-45
+        bg-white/0 backdrop-blur-xl
+        border-r border-b border-white/30
+      "/>
+    </div>
+  );
+
+  const SocialLink = ({ link}: SocialLinkProps) => (
+    <div
+      className="relative group"
+    >
+      <a
+        href={link.href}
+        className={`
+          relative flex items-center gap-3
+          px-6 py-3 rounded-full
+          bg-white/5 backdrop-blur-sm
+          hover:bg-white/10
+          transition-all duration-500
+          ${link.color}
+        `}
+      >
+        <span className="relative flex items-center justify-center">
+          {link.icon}
+          <span className="absolute inset-0 blur-sm opacity-0 group-hover:opacity-50 transition-opacity duration-300">
+            {link.icon}
+          </span>
+        </span>
+        <span className="font-medium text-white">
+          {link.label}
+        </span>
+        {[...Array(3)].map((_, i) => (
+          <span
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full opacity-0 group-hover:animate-particle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${i * 0.5}s`
+            }}
+          />
+        ))}
+      </a>
+      <Tooltip 
+        isVisible={false}
+        stats={link.stats}
+        description={link.description}
+      />
+    </div>
+  );
 
   const socialLinks: Link[] = [
     {
@@ -71,93 +139,14 @@ const Footer = () => {
     }
   ];
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const Tooltip = ({ isVisible, stats, description }: { isVisible: boolean, stats: string, description: string }) => (
-    <div
-      className={`
-        absolute left-1 -translate-x-1/2
-        w-max px-4 py-2
-        bg-black/90 backdrop-blur-xl
-        rounded-lg border border-white/20
-        transition-all duration-300 ease-out
-        ${isVisible 
-          ? 'opacity-100 -top-20 transform-none' 
-          : 'opacity-0 -top-16 translate-y-2 pointer-events-none'
-        }
-        shadow-[0_8px_32px_rgba(0,0,0,0.2)]
-      `}
-    >
-      <div className="text-center whitespace-nowrap">
-        <p className="text-white font-medium text-sm mb-1">{stats}</p>
-        <p className="text-white/60 text-xs">{description}</p>
-      </div>
-      <div className="
-        absolute left-1/2 -translate-x-1/2 bottom-[-8px]
-        w-4 h-4 rotate-45
-        bg-white/0 backdrop-blur-xl
-        border-r border-b border-white/30
-      "/>
-    </div>
-  );
-
-  const SocialLink = ({ link, index }: SocialLinkProps) => (
-    <div
-      className="relative group"
-      onMouseEnter={() => setHoveredLink(index)}
-      onMouseLeave={() => setHoveredLink(null)}
-    >
-      <a
-        href={link.href}
-        className={`
-          relative flex items-center gap-3
-          px-6 py-3 rounded-full
-          bg-white/5 backdrop-blur-sm
-          hover:bg-white/10
-          transition-all duration-500
-          ${link.color}
-        `}
-      >
-        <span className="relative flex items-center justify-center">
-          {link.icon}
-          <span className="absolute inset-0 blur-sm opacity-0 group-hover:opacity-50 transition-opacity duration-300">
-            {link.icon}
-          </span>
-        </span>
-        <span className="font-medium text-white">
-          {link.label}
-        </span>
-        {[...Array(3)].map((_, i) => (
-          <span
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full opacity-0 group-hover:animate-particle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.5}s`
-            }}
-          />
-        ))}
-      </a>
-      <Tooltip 
-        isVisible={hoveredLink === index}
-        stats={link.stats}
-        description={link.description}
-      />
-    </div>
-  );
-
   return (
     <footer 
       className="relative bg-black/95 overflow-hidden border-t border-white/10"
-      onMouseMove={handleMouseMove}
     >
       <div 
         className="absolute inset-0 opacity-30 pointer-events-none"
         style={{
-          background: `radial-gradient(circle 250px at ${mousePosition.x}px ${mousePosition.y}px, rgba(150, 500, 280, 0.3), transparent)`
+          background: `radial-gradient(circle 250px at ${x}px ${y}px, rgba(150, 500, 280, 0.3), transparent)`
         }}
       />
       <div className="max-w-7xl mx-auto px-4 py-20 relative z-10">

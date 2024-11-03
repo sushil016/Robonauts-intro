@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, ChevronRight, Award, Users, Clock } from 'lucide-react';
+import useMousePosition from './hooks/mousePosition';
 
 interface Event {
   date: string;
@@ -130,6 +131,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, isSelected, onClick, index
 const EventsAndCompetitions: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<number | null>(null);
   const [visibleEvents, setVisibleEvents] = useState<boolean[]>(new Array(events.length).fill(false));
+   const { x, y } = useMousePosition();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -156,6 +158,21 @@ const EventsAndCompetitions: React.FC = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  // Add subtle mouse movement effect to event cards
+  const getCardTransform = (index: number) => {
+    const cardElement = document.querySelector(`[data-index="${index}"]`);
+    if (!cardElement) return '';
+    
+    const rect = cardElement.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const moveX = (x - centerX) * 0.01;
+    const moveY = (y - centerY) * 0.01;
+    
+    return `translate(${moveX}px, ${moveY}px)`;
+  };
 
   return (
     <section id="events" className="py-20 backdrop-blur-xl bg-black/80">
@@ -188,7 +205,15 @@ const EventsAndCompetitions: React.FC = () => {
         </h2>
         <div className="relative">
           {events.map((event, index) => (
-            <div key={index} className="event-card-wrapper" data-index={index}>
+            <div 
+              key={index} 
+              className="event-card-wrapper" 
+              data-index={index}
+              style={{
+                transform: getCardTransform(index),
+                transition: 'transform 0.3s ease-out'
+              }}
+            >
               <EventCard
                 event={event}
                 isSelected={selectedEvent === index}
