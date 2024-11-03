@@ -130,7 +130,8 @@ const Projects = ({ setBgVariant, setCursorText, }: ProjectsProps) => {
   ];
 
   function mouseEnter() {
-   setCursorText('View Project');
+   setBgVariant('nameCursor');
+   setCursorText('Achievements');
   }
 
   function mouseLeave() {

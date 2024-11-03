@@ -39,7 +39,7 @@ const HorizontalScrollPage = () => {
         style={{ width: "200vw" }}
       >
         <div className="horizontal-section w-screen h-screen flex-shrink-0">
-          <Projects /> 
+          <Projects setBgVariant={() => {}} setCursorText={() => {}} /> 
         </div>
       </div>
     </section>

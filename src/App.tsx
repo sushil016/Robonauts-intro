@@ -50,12 +50,11 @@ function App() {
     nameCursor: {
       opacity: 1,
       width: 100,
-      height: 100,
-      // border:"none",
-      backgroundColor: "#1E1E2E",
-      mixBlendMode: "difference" as const,
+      height: 50,
+      border:"none",
+      background: "gradient",
       x: x - 50,
-      y: y - 50,
+      y: y - 25,
       cursor: "none",
     },
   };
@@ -91,9 +90,9 @@ function App() {
           variants={variants}
           transition={spring}
           animate={bgVariant}
-          className="cursor-none z-50 h-[40px] w-[40px] rounded-full border-2 border-orange-600 fixed top-0 left-0 pointer-events-none justify-center items-center shadow-lg shadow-violet-500"
+          className="cursor-none z-50 h-[50px] w-[50px] rounded-full border-2 border-orange-600 fixed top-0 left-0 pointer-events-none justify-center items-center shadow-lg shadow-violet-500"
         > 
-          <span className="text-white m-auto font-size-inherit flex justify-center items-center mt-9">
+          <span className="text-orange-600 m-auto font-size-inherit flex justify-center items-center h-full text-sm">
             {cursorText}
           </span>
         </motion.div>

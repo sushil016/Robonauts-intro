@@ -21,6 +21,8 @@ export default {
         "textSec": "#CAA6F7",
         "bgPrimary": "#1D1D1D",
         "secondary" : "#1E1E2E",
+        "gradient": "linear-gradient(to bottom right, #FF7E5F, #FEB47B)",
+        "gradientButton": "bg-gradient-to-r from-cyan-500 to-blue-600"
       },
       extend: {
         animation: {
