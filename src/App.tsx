@@ -17,6 +17,8 @@ import ClubMembershipForm from './components/community/MemberDetails';
 import AdminDashboardMember from './components/community/MemberInfoPage';
 import useMousePosition from './components/hooks/mousePosition';
 import { motion } from "framer-motion";
+import AdminLogin from './components/admin/AdminLogin';
+import ProtectedRoute from './components/admin/ProtectedRoute';
 
 
 
@@ -120,8 +122,17 @@ function App() {
           <Route path="/contact" element={<Contact  />} />
           <Route path="/community" element={<ApplicationForm  />} />
           <Route path="/member" element={<ClubMembershipForm  />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/member" element={<AdminDashboardMember/>} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/member" element={
+            <ProtectedRoute>
+              <AdminDashboardMember />
+            </ProtectedRoute>
+          } />
         </Routes>
         
         <Footer  />
