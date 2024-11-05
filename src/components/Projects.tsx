@@ -3,9 +3,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, useScroll } from 'framer-motion';
 import { Camera, Shield, Sword, Video, Image as ImageIcon, Box } from 'lucide-react';
-import ProjectImage from '../assets/robot-Image-1.jpg'
-import ProjectImagetwo from '../assets/projectimage-2.webp'
-import ProjectImagethree from '../assets/projectimagefour.webp'
 import Lenis from '@studio-freight/lenis';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -95,7 +92,7 @@ const Projects = ({ setBgVariant, setCursorText, }: ProjectsProps) => {
         { label: 'Flight Time', value: '45min' },
         { label: 'AI Detection', value: '99.9%' }
       ],
-      image: ProjectImage,
+      image:"/sih-2022 winner.jpg",
     },
     {
       title: "Combat Robot",
@@ -109,7 +106,7 @@ const Projects = ({ setBgVariant, setCursorText, }: ProjectsProps) => {
         { label: 'Weight', value: '250lbs' },
         { label: 'Speed', value: '20mph' }
       ],
-      image: ProjectImagetwo
+      image: "/iitb-Agri-Achivement.jpeg"
     },
     {
       title: "Content Creator Drone",
@@ -125,8 +122,25 @@ const Projects = ({ setBgVariant, setCursorText, }: ProjectsProps) => {
         { label: 'Stabilization', value: '6-Axis' },
         { label: 'Storage', value: '1TB' }
       ],
-      image:ProjectImagethree
+      image:"/FPV drone racing.jpeg"
+    },
+    {
+      title:"Nitro Car Racing",
+      description:"",
+      gradient:"from-secondary to-slate-900/10",
+      icons:[],
+      stats:[],
+      image:"/FPV nitro car racing.jpeg"
+    },
+    {
+      title:"NIT Trichy Sundroid",
+      description:"",
+      gradient:"from-secondary to-slate-900/10",
+      icons:[],
+      stats:[],
+      image:"/NIT-Trichy-Sumdroid.jpeg"
     }
+
   ];
 
   function mouseEnter() {

@@ -194,9 +194,18 @@ export default function LandingPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
-            className="text-3xl mb-8 text-textPrimary"
+            className="text-4xl mb-8 text-textPrimary"
           >
-            Innovate. Create. Automate.
+           Revolutionizing
+           Through Bold Innovation.
+          </motion.p>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            className="text-xl mb-8 text-neutral-400 opacity-20"
+          >
+          A Thrilling Journey into the Realm of Robotics & Automation
           </motion.p>
         
           <motion.div 
