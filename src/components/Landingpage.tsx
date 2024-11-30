@@ -3,7 +3,7 @@ import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { ChevronDown, Wrench, Rocket, Trophy, Users, Zap, ArrowRight, Star } from 'lucide-react';
 import { StarryBackground } from './ui/StarryBackground';
   import './LandingPage.css';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useMousePosition from './hooks/mousePosition';
 
 const activities = [
@@ -67,6 +67,7 @@ export default function LandingPage() {
   const activitiesRef = useRef<HTMLDivElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const { x, y } = useMousePosition();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -352,8 +353,8 @@ export default function LandingPage() {
             transition={{ delay: 0.8 }}
             className="mt-12 text-center"
           >
-            <button className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300">
-             <Link to="/community">Join Our Club</Link>
+            <button onClick={() => navigate('/community')} className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300">
+            Join Our Club
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.div>
