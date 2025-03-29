@@ -63,9 +63,9 @@ interface TeamMember {
 // Optimized team members data with memoization
 const teamMembers: TeamMember[] = [
   {
-    name: 'Dr.',
+    name: 'Saket Pathak',
     role: 'Faculty Advisor',
-    image: '/api/placeholder/400/400',
+    image: '/sih-2022 winner.jpg',
     bio: 'Leading robotics research with over 10 years of experience in autonomous systems.',
     expertise: ['Robotics', 'AI', 'Control Systems'],
     achievements: ['Published 20+ Papers', 'Led 5 Major Projects', 'Industry Partnerships'],
@@ -89,7 +89,7 @@ const teamMembers: TeamMember[] = [
     }
   },
   {
-    name: 'og',
+    name: 'Omkar Pol',
     role: 'Technical Lead',
     image: '/api/placeholder/400/400',
     bio: 'Specialized in embedded systems and computer vision applications.',
@@ -102,9 +102,9 @@ const teamMembers: TeamMember[] = [
     }
   },
   {
-    name: 'Omkar Pol',
+    name: 'Sushil Sahani',
     role: 'Project Manager',
-    image: '/api/placeholder/400/400',
+    image: '/',
     bio: 'Coordinating innovative robotics projects and team collaborations.',
     expertise: ['Agile', 'Technical Planning', 'Systems Integration'],
     achievements: ['Project Excellence Award', 'Team Leadership Award', 'Industry Collaboration'],

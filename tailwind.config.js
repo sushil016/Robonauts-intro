@@ -17,6 +17,17 @@ export default {
     },
     extend: {
       colors: {
+        dark: {
+          900: '#0A0A2E',
+          800: '#1A1A4A',
+        },
+        primary: {
+          900: '#2A2A72',
+          400: '#009FFD',
+        },
+        secondary: {
+          400: '#FF0076',
+        },
         "textPrimary" : "#468DE6",
         "textSec": "#CAA6F7",
         "bgPrimary": "#1D1D1D",

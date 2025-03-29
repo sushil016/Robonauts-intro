@@ -10,6 +10,9 @@ import Contact from './components/Contact';
 import RobotMascot from './components/RobotMascotProps';
 import LandingPage from './components/Landingpage';
 import TeamMembers from './components/TeamMembers';
+import Mentors from './components/Mentors';
+import TechnologyShowcase from './components/TechnologyShowcase';
+import AIMLImpact from './components/AIMLImpact';
 import Projects from './components/Projects';
 import ApplicationForm from './components/community/ApplicationForm';
 import AdminDashboard from './components/community/AdminDashboard';
@@ -19,7 +22,7 @@ import useMousePosition from './components/hooks/mousePosition';
 import { motion } from "framer-motion";
 import AdminLogin from './components/admin/AdminLogin';
 import ProtectedRoute from './components/admin/ProtectedRoute';
-
+import AchievementsPage from './components/Achievements';
 
 
 function App() {
@@ -106,20 +109,26 @@ function App() {
           <Route path="/" element={
             <>
               <LandingPage />
+              <EventsAndCompetitions/>
               {/* <ClubOverview  /> */}
               {/* <Meteor/> */}
-              <Projects
+              {/* <Projects
                setBgVariant={setBgVariant}
                setCursorText={setCursorText}
-              />
+              /> */}
+              <TechnologyShowcase />
+              <AIMLImpact />
+              <Mentors />
               <TeamMembers />
-              <EventsAndCompetitions/>
+             
               {/* <ExploreButtons /> */}
             </>
           } />
           <Route path="/courses" element={<CoursesAndWorkshops  />} />
           <Route path="/resources" element={<Resources/>} />
           <Route path="/contact" element={<Contact  />} />
+          <Route path="/events" element={<EventsAndCompetitions />} />
+          <Route path="/achievements" element={<AchievementsPage />} />
           <Route path="/community" element={<ApplicationForm  />} />
           <Route path="/member" element={<ClubMembershipForm  />} />
           <Route path="/admin" element={<AdminLogin />} />
