@@ -13,7 +13,6 @@ import TeamMembers from './components/TeamMembers';
 import Mentors from './components/Mentors';
 import TechnologyShowcase from './components/TechnologyShowcase';
 import AIMLImpact from './components/AIMLImpact';
-import Projects from './components/Projects';
 import ApplicationForm from './components/community/ApplicationForm';
 import AdminDashboard from './components/community/AdminDashboard';
 import ClubMembershipForm from './components/community/MemberDetails';
@@ -28,9 +27,9 @@ import AchievementsPage from './components/Achievements';
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const { x, y } = useMousePosition();
-  const [bgVariant, setBgVariant] = useState("default");
+  const [bgVariant, _setBgVariant] = useState("default");
 
-  const [cursorText, setCursorText] = useState("");
+  const [cursorText, _setCursorText] = useState("");
 
   const variants = {
     default: {
@@ -83,10 +82,6 @@ function App() {
     };
   }, []);
 
-  // const toggleTheme = () => {
-  //   setIsDarkTheme(!isDarkTheme);
-  // };
-
   return (
     <Router>
       <div className={`min-h-screen  text-white`}>
@@ -104,24 +99,15 @@ function App() {
       </div>
         <div className="lightning-robot-bg"></div>
         <Header  />
-        {/* <ThemeSwitch /> */}
         <Routes>
           <Route path="/" element={
             <>
               <LandingPage />
               <EventsAndCompetitions/>
-              {/* <ClubOverview  /> */}
-              {/* <Meteor/> */}
-              {/* <Projects
-               setBgVariant={setBgVariant}
-               setCursorText={setCursorText}
-              /> */}
               <TechnologyShowcase />
               <AIMLImpact />
               <Mentors />
               <TeamMembers />
-             
-              {/* <ExploreButtons /> */}
             </>
           } />
           <Route path="/courses" element={<CoursesAndWorkshops  />} />
@@ -154,6 +140,3 @@ function App() {
 }
 
 export default App;
-
-
-// bg-gradient-to-br from-purple-900 to-indigo-900
