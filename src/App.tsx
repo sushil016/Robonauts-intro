@@ -9,7 +9,6 @@ import Resources from './components/Resources';
 import Contact from './components/Contact';
 import RobotMascot from './components/RobotMascotProps';
 import LandingPage from './components/Landingpage';
-import TeamMembers from './components/TeamMembers';
 import Mentors from './components/Mentors';
 import TechnologyShowcase from './components/TechnologyShowcase';
 import AIMLImpact from './components/AIMLImpact';
@@ -22,7 +21,8 @@ import { motion } from "framer-motion";
 import AdminLogin from './components/admin/AdminLogin';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 import AchievementsPage from './components/Achievements';
-
+import EventHighlights from './components/EventHighlights';
+import Events from './components/Events';
 
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -103,17 +103,18 @@ function App() {
           <Route path="/" element={
             <>
               <LandingPage />
+              <EventHighlights />
               <EventsAndCompetitions/>
               <TechnologyShowcase />
               <AIMLImpact />
               <Mentors />
-              <TeamMembers />
+              {/* <TeamMembers /> */}
             </>
           } />
           <Route path="/courses" element={<CoursesAndWorkshops  />} />
           <Route path="/resources" element={<Resources/>} />
           <Route path="/contact" element={<Contact  />} />
-          <Route path="/events" element={<EventsAndCompetitions />} />
+          <Route path="/events" element={<Events />} />
           <Route path="/achievements" element={<AchievementsPage />} />
           <Route path="/community" element={<ApplicationForm  />} />
           <Route path="/member" element={<ClubMembershipForm  />} />

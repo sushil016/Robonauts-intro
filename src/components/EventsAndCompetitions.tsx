@@ -184,6 +184,7 @@ const EventsAndCompetitions: React.FC = () => {
 
   return (
     <section id="events" className="py-20 backdrop-blur-xl bg-black/80">
+      
       <style>
         {`
           @keyframes floatAnimation {

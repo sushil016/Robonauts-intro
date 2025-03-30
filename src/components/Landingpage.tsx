@@ -104,14 +104,7 @@ const CodeLinesEffect = () => {
 
 // Notification data
 const notifications = [
-  {
-    id: 1,
-    type: 'important',
-    title: 'New Robotics Lab Opening',
-    message: 'Our state-of-the-art robotics lab will be opening on July 15, 2025. All members are invited to the inauguration ceremony.',
-    date: 'July 15, 2025',
-    link: '/resources'
-  },
+
   {
     id: 2,
     type: 'event',
@@ -121,7 +114,7 @@ const notifications = [
     link: '/courses'
   },
   {
-    id: 3,
+    id: 1,
     type: 'alert',
     title: 'FE Recruitment',
     message: 'Recruitment for Freshers is open. Apply now!',
@@ -265,7 +258,7 @@ export default function LandingPage() {
           <motion.div
             className="absolute inset-0"
             style={{
-              backgroundImage: `radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)`,
+              backgroundImage: `radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.15) 0%, transparent 70%)`,
               backgroundSize: '100% 100%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
@@ -273,6 +266,18 @@ export default function LandingPage() {
             }}
           />
           <CircuitBackground />
+          {/* Add animated gradient overlay */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5"
+            animate={{
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
         </div>
 
         {/* Hero Content */}
@@ -292,7 +297,7 @@ export default function LandingPage() {
           >
             <div className="flex items-center justify-center flex-wrap gap-2">
               <span className="bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">Welcome to</span>
-              <img src="/robonauts-logo.png" alt="Robonauts" className="ml-2 mt-6 h-16 md:h-32 w-auto object-contain hover:scale-105 transition-transform duration-300" />
+              <img src="/robonauts-logo.png" alt="Robonauts" className="ml-2 h-16 md:h-32 w-auto object-contain hover:scale-105 transition-transform duration-300" />
             </div>
             <motion.div
               className="absolute -inset-2 bg-cyan-500/20 -z-10 blur-xl"
@@ -311,7 +316,7 @@ export default function LandingPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
-            className="text-2xl md:text-4xl mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400 font-medium text-center"
+            className="text-2xl md:text-4xl mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400 font-medium text-center px-4"
           >
            Revolutionizing Through Bold Innovation.
           </motion.p>
@@ -319,7 +324,7 @@ export default function LandingPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
-            className="text-lg md:text-xl mb-8 text-neutral-400 opacity-60 max-w-2xl text-center px-4"
+            className="text-lg md:text-xl mb-48 text-neutral-400 opacity-60 max-w-2xl text-center px-4"
           >
           A Thrilling Journey into the Realm of Robotics & Automation
           </motion.p>
@@ -329,7 +334,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.8 }}
-            className="absolute bottom-32 w-full max-w-4xl mx-auto px-4"
+            className="absolute bottom-32 w-full max-w-4xl mx-auto px-4 z-10"
           >
             <div className="bg-zinc-900/80 backdrop-blur-md border border-zinc-800 rounded-xl overflow-hidden shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-all duration-300 hover:border-zinc-700">
               <div className="flex items-center justify-center bg-gradient-to-r from-cyan-900/80 to-blue-900/80 px-4 py-3">
@@ -337,7 +342,7 @@ export default function LandingPage() {
                 <h3 className="text-white font-semibold tracking-wide">Important Updates</h3>
               </div>
               
-              <div className="relative h-28 md:h-24 overflow-hidden">
+              <div className="relative h-32 md:h-28 overflow-hidden">
                 <AnimatePresence mode="wait">
                   {notifications.map((notification, index) => (
                     index === activeNotification && (
@@ -355,12 +360,12 @@ export default function LandingPage() {
                           {notification.type === 'alert' && <Bell className="w-6 h-6 text-yellow-400" />}
                         </div>
                         
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0">
                           <div className="flex justify-between items-start flex-wrap gap-1">
-                            <h4 className="text-white font-medium">{notification.title}</h4>
-                            <span className="text-xs bg-cyan-500/20 px-2 py-0.5 rounded-full text-cyan-300">{notification.date}</span>
+                            <h4 className="text-white font-medium truncate">{notification.title}</h4>
+                            <span className="text-xs bg-cyan-500/20 px-2 py-0.5 rounded-full text-cyan-300 whitespace-nowrap">{notification.date}</span>
                           </div>
-                          <p className="text-gray-300 text-sm mt-1">{notification.message}</p>
+                          <p className="text-gray-300 text-sm mt-1 line-clamp-2">{notification.message}</p>
                           <motion.div 
                             className="mt-2"
                             whileHover={{ x: 5 }}
@@ -394,6 +399,7 @@ export default function LandingPage() {
             </div>
           </motion.div>
 
+          {/* Scroll Button */}
           <motion.div 
             animate={{ 
               y: [0, 10, 0],
@@ -403,7 +409,7 @@ export default function LandingPage() {
                 ease: "easeInOut"
               }
             }}
-            className="mt-16"
+            className="absolute bottom-8"
           >
             <motion.button 
               className="group bg-zinc-900/50 backdrop-blur-sm p-3 rounded-full border border-zinc-800 hover:border-cyan-500/50 transition-colors duration-300 shadow-lg"
@@ -464,9 +470,9 @@ export default function LandingPage() {
                       LIVE
                     </div>
                   ) : (
-                    <div className="absolute -top-4 -right-16 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-xl flex items-center">
+                    <div className="absolute -top-4 -right-3 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-xl flex items-center">
                       <span className="w-2 h-2 bg-white rounded-full mr-1 animate-ping"></span>
-                      Live in {timeLeft.days} days
+                      soon
                     </div>
                   )}
                 </div>
