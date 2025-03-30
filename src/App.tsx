@@ -1,7 +1,6 @@
 import  { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import EventsAndCompetitions from './components/EventsAndCompetitions';
 import CoursesAndWorkshops from './components/CoursesAndWorkshops';
 import Footer from './components/Footer';
 import FloatingActionButton from './components/FloatingActionButton';
@@ -21,8 +20,8 @@ import { motion } from "framer-motion";
 import AdminLogin from './components/admin/AdminLogin';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 import AchievementsPage from './components/Achievements';
-import EventHighlights from './components/EventHighlights';
-import Events from './components/Events';
+import EventHighlights from './components/Achieve';
+import EventsPage from './pages/Events';
 
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -104,7 +103,7 @@ function App() {
             <>
               <LandingPage />
               <EventHighlights />
-              <EventsAndCompetitions/>
+              {/* <EventsAndCompetitions/> */}
               <TechnologyShowcase />
               <AIMLImpact />
               <Mentors />
@@ -114,7 +113,7 @@ function App() {
           <Route path="/courses" element={<CoursesAndWorkshops  />} />
           <Route path="/resources" element={<Resources/>} />
           <Route path="/contact" element={<Contact  />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="/events" element={<EventsPage />} />
           <Route path="/achievements" element={<AchievementsPage />} />
           <Route path="/community" element={<ApplicationForm  />} />
           <Route path="/member" element={<ClubMembershipForm  />} />

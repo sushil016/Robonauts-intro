@@ -10,72 +10,52 @@ const AIMLImpact = () => {
 
   // Reference for the scrollable container
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
+  const [isHovering, setIsHovering] = useState(false);
   
-  // Auto-scroll effect - improved for smoother, continuous scrolling
+  // Auto-scroll effect
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
     
-    // Clone the content for seamless looping
-    const originalContent = scrollContainer.querySelector('.scroll-content');
-    if (!originalContent) return;
-    
-    // Create the clone for infinite scrolling
-    const clone = originalContent.cloneNode(true) as HTMLElement;
-    clone.setAttribute('aria-hidden', 'true');
-    scrollContainer.appendChild(clone);
-    
-    // Scroll animation variables
-    let animationId: number;
-    let startTime: number;
-    const scrollDuration = 20000; // 20 seconds for one full scroll cycle
-    const totalHeight = originalContent.scrollHeight;
-    
-    // Smooth animation function
-    const animateScroll = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      if (!shouldAutoScroll) {
-        startTime = timestamp - (timestamp % scrollDuration);
+    // Initialize scrolling variables
+    let scrollHeight = scrollContainer.scrollHeight;
+    let scrollPosition = 0;
+    let animationFrameId: number;
+    const scrollSpeed = 0.5; // pixels per frame
+
+    // Animation function for smooth scrolling
+    const animate = () => {
+      if (!isHovering && scrollContainer) {
+        // Update scroll position
+        scrollPosition += scrollSpeed;
+        
+        // Reset position when reaching the end to create infinite loop
+        if (scrollPosition >= scrollHeight / 2) {
+          scrollPosition = 0;
+          scrollContainer.scrollTop = 0;
+        } else {
+          scrollContainer.scrollTop = scrollPosition;
+        }
       }
       
-      const elapsed = (timestamp - startTime) % scrollDuration;
-      const progress = elapsed / scrollDuration;
-      
-      if (scrollContainer) {
-        // Calculate position based on total content height
-        scrollContainer.scrollTop = progress * totalHeight;
-      }
-      
-      animationId = requestAnimationFrame(animateScroll);
+      // Continue animation loop
+      animationFrameId = requestAnimationFrame(animate);
     };
     
-    // Start animation
-    animationId = requestAnimationFrame(animateScroll);
+    // Start the animation
+    animationFrameId = requestAnimationFrame(animate);
     
-    // Pause scrolling when user interacts
-    const handleMouseEnter = () => setShouldAutoScroll(false);
-    const handleMouseLeave = () => setShouldAutoScroll(true);
-    const handleTouchStart = () => setShouldAutoScroll(false);
-    const handleTouchEnd = () => setShouldAutoScroll(true);
-    
-    scrollContainer.addEventListener('mouseenter', handleMouseEnter);
-    scrollContainer.addEventListener('mouseleave', handleMouseLeave);
-    scrollContainer.addEventListener('touchstart', handleTouchStart);
-    scrollContainer.addEventListener('touchend', handleTouchEnd);
-    
+    // Cleanup function
     return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-      if (scrollContainer) {
-        scrollContainer.removeEventListener('mouseenter', handleMouseEnter);
-        scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
-        scrollContainer.removeEventListener('touchstart', handleTouchStart);
-        scrollContainer.removeEventListener('touchend', handleTouchEnd);
-      }
+      cancelAnimationFrame(animationFrameId);
     };
-  }, [shouldAutoScroll]);
+  }, [isHovering]);
+  
+  // Handle hover events to pause scrolling
+  const handleMouseEnter = () => setIsHovering(true);
+  const handleMouseLeave = () => setIsHovering(false);
+  const handleTouchStart = () => setIsHovering(true);
+  const handleTouchEnd = () => setIsHovering(false);
 
   // AI/ML applications in robotics
   const applications = [
@@ -124,30 +104,30 @@ const AIMLImpact = () => {
   ];
 
   return (
-    <div className="relative z-10 py-24 px-4 bg-gradient-to-b from-zinc-900 to-black">
+    <div className="relative z-10 py-16 md:py-24 px-4 bg-gradient-to-b from-zinc-900 to-black">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <div className="inline-block mb-4 px-6 py-2 rounded-full bg-zinc-800 text-cyan-400">
+          <div className="inline-block mb-4 px-4 sm:px-6 py-2 rounded-full bg-zinc-800 text-cyan-400">
             Future of Robotics
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400">
             AI & Machine Learning in Robotics
           </h2>
-          <p className="text-gray-400 max-w-3xl mx-auto text-lg">
+          <p className="text-gray-400 max-w-3xl mx-auto text-base sm:text-lg">
             Artificial Intelligence and Machine Learning are revolutionizing the field of robotics, 
             enabling machines to learn from experience, adapt to new inputs, and perform human-like tasks.
           </p>
         </motion.div>
 
         {/* Blue-bordered transparent card container */}
-        <div className="p-6 md:p-8 rounded-2xl border border-blue-500/30 bg-blue-900/10 backdrop-blur-sm shadow-lg shadow-blue-500/10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="p-4 sm:p-6 md:p-8 rounded-2xl border border-blue-500/30 bg-blue-900/10 backdrop-blur-sm shadow-lg shadow-blue-500/10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left side - Enhanced Image Section */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -170,19 +150,19 @@ const AIMLImpact = () => {
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-purple-900/50 to-transparent mix-blend-overlay"></div>
                 
                 {/* Content overlay */}
-                <div className="absolute inset-0 flex flex-col justify-end p-8">
-                  <h3 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">AI & Robotics</h3>
-                  <p className="text-gray-200 drop-shadow-md">
+                <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-8">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 drop-shadow-lg">AI & Robotics</h3>
+                  <p className="text-sm sm:text-base text-gray-200 drop-shadow-md">
                     Transforming industries through intelligent automation and data-driven decision making.
                   </p>
                   
                   {/* Tech elements decoration */}
                   <div className="absolute top-4 right-4 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-cyan-500/20 backdrop-blur-sm flex items-center justify-center border border-cyan-500/30">
-                      <span className="text-lg">🤖</span>
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cyan-500/20 backdrop-blur-sm flex items-center justify-center border border-cyan-500/30">
+                      <span className="text-base sm:text-lg">🤖</span>
                     </div>
-                    <div className="w-10 h-10 rounded-full bg-purple-500/20 backdrop-blur-sm flex items-center justify-center border border-purple-500/30">
-                      <span className="text-lg">🧠</span>
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-purple-500/20 backdrop-blur-sm flex items-center justify-center border border-purple-500/30">
+                      <span className="text-base sm:text-lg">🧠</span>
                     </div>
                   </div>
                 </div>
@@ -216,7 +196,7 @@ const AIMLImpact = () => {
             </motion.div>
             
             {/* Right side - Applications with improved auto-scroll */}
-            <div className="h-[500px] relative">
+            <div className="h-[400px] sm:h-[500px] relative">
               {/* Gradient overlays for smooth scrolling effect */}
               <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-zinc-900/90 to-transparent z-10 pointer-events-none"></div>
               <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-zinc-900/90 to-transparent z-10 pointer-events-none"></div>
@@ -225,48 +205,77 @@ const AIMLImpact = () => {
               <div 
                 ref={scrollContainerRef}
                 className="h-full overflow-y-scroll hide-scrollbar"
-                style={{ scrollBehavior: 'smooth' }}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
               >
-                {/* Wrapping content in a container for cloning */}
-                <div className="scroll-content">
-                  <div className="space-y-6 pr-4">
-                    {applications.map((app, index) => (
-                      <motion.div
-                        key={app.title}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={inView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.5, delay: 0.4 + (index * 0.15) }}
-                        className="bg-zinc-900/80 backdrop-blur-sm p-5 rounded-xl flex items-start gap-5 border border-zinc-800 hover:border-purple-900/50 transition-all duration-300"
-                      >
-                        <div className={`flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br ${app.color} flex items-center justify-center text-2xl`}>
-                          {app.icon}
-                        </div>
-                        
-                        <div>
-                          <h3 className="text-xl font-medium text-white mb-2">{app.title}</h3>
-                          <p className="text-gray-400">{app.description}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                    
+                {/* Display the content twice to create seamless loop */}
+                <div className="space-y-4 sm:space-y-6 pr-4">
+                  {/* First set of applications */}
+                  {applications.map((app, index) => (
                     <motion.div
+                      key={`first-${app.title}`}
                       initial={{ opacity: 0, y: 20 }}
                       animate={inView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5, delay: 1 }}
-                      className="mt-8 mb-12"
+                      transition={{ duration: 0.5, delay: 0.4 + (index * 0.15) }}
+                      className="bg-zinc-900/80 backdrop-blur-sm p-4 sm:p-5 rounded-xl flex items-start gap-3 sm:gap-5 border border-zinc-800 hover:border-purple-900/50 transition-all duration-300"
                     >
-                      <div className="p-5 rounded-xl bg-gradient-to-r from-purple-900/20 to-cyan-900/20 border border-purple-500/20">
-                        <h4 className="text-lg font-medium text-purple-400 mb-2">Did You Know?</h4>
-                        <p className="text-gray-300">
-                          More than 80% of robotics innovations now incorporate some form of machine learning,
-                          with computer vision being the most widely implemented AI technology in modern robots.
-                        </p>
+                      <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${app.color} flex items-center justify-center text-xl sm:text-2xl`}>
+                        {app.icon}
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-medium text-white mb-1 sm:mb-2">{app.title}</h3>
+                        <p className="text-sm sm:text-base text-gray-400">{app.description}</p>
                       </div>
                     </motion.div>
-                  </div>
+                  ))}
+                  
+                  {/* Fact box */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 1 }}
+                    className="mt-6 sm:mt-8 mb-8 sm:mb-12"
+                  >
+                    <div className="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-purple-900/20 to-cyan-900/20 border border-purple-500/20">
+                      <h4 className="text-base sm:text-lg font-medium text-purple-400 mb-2">Did You Know?</h4>
+                      <p className="text-sm sm:text-base text-gray-300">
+                        More than 80% of robotics innovations now incorporate some form of machine learning,
+                        with computer vision being the most widely implemented AI technology in modern robots.
+                      </p>
+                    </div>
+                  </motion.div>
+                  
+                  {/* Second set of applications (duplicate for seamless scroll) */}
+                  {applications.map((app, index) => (
+                    <motion.div
+                      key={`second-${app.title}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={inView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 0.4 + (index * 0.15) }}
+                      className="bg-zinc-900/80 backdrop-blur-sm p-4 sm:p-5 rounded-xl flex items-start gap-3 sm:gap-5 border border-zinc-800 hover:border-purple-900/50 transition-all duration-300"
+                    >
+                      <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${app.color} flex items-center justify-center text-xl sm:text-2xl`}>
+                        {app.icon}
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-medium text-white mb-1 sm:mb-2">{app.title}</h3>
+                        <p className="text-sm sm:text-base text-gray-400">{app.description}</p>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
-                {/* Clone will be inserted here dynamically by useEffect */}
               </div>
+              
+              {/* Visual indicator for hover pause */}
+              {isHovering && (
+                <div className="absolute top-4 right-4 bg-purple-900/70 text-white text-xs px-2 py-1 rounded-md backdrop-blur-sm">
+                  Scroll Paused
+                </div>
+              )}
             </div>
           </div>
         </div>

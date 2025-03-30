@@ -5,36 +5,44 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 const highlights = [
   { 
     id: 1, 
-    src: '/images/robowars.png',
-    alt: 'RoboMania 2024 Winner',
-    title: 'Championship Battle',
-    description: 'Witness the epic finale of RoboMania 2024',
-    date: 'March 15, 2024'
+    src: '/achievement/sih-2022 winner.jpg',
+    alt: 'Smart India Hackathon 2022',
+    title: 'SMART INDIA HACKATHON - 2022',
+    description: 'Anti-drone system for VIP protection and surveillance.',
+    date: '2022'
   },
   { 
     id: 2, 
-    src: '/images/robowars.png',
-    alt: 'Exciting Robot Battle',
-    title: 'Arena Combat',
-    description: 'High-intensity robot battles in our state-of-the-art arena',
-    date: 'March 10, 2024'
+    src: '/achievement/FPV drone racing.jpeg',
+    alt: 'FPV Drone Racing at Amity University',
+    title: 'FPV DRONE RACING AT AMITY UNIVERSITY, MUMBAI',
+    description: 'Saket Pathak stood 1st and won the Competition by completing the laps in shortest time.',
+    date: '2023'
   },
   { 
     id: 3, 
-    src: '/images/robowars.png',
-    alt: 'Team Collaboration',
-    title: 'Team Spirit',
-    description: 'Collaborative engineering at its finest',
-    date: 'March 5, 2024'
+    src: '/achievement/FPV nitro car racing.jpeg',
+    alt: 'RC Nitro Car Racing at Amity University',
+    title: 'RC NITRO CAR RACING AT AMITY UNIVERSITY, MUMBAI',
+    description: 'Ketan and Saket won the race, leaving all other participants behind! Winning the competition was the best part. Dedication and Consistency made efforts work effectively',
+    date: '2023'
   },
   { 
     id: 4, 
-    src: '/images/robowars.png',
-    alt: 'Innovative Robot Design',
-    title: 'Innovation',
-    description: 'Pushing the boundaries of robot design and technology',
-    date: 'March 1, 2024'
+    src: '/achievement/NIT-Trichy-Sumdroid.jpeg',
+    alt: 'NIT Trichy Simdroid 2021',
+    title: 'NIT TRICHY SIMDROID 2021',
+    description: 'Design a robot which will collect sea debris from deep ocean.',
+    date: '2021'
   },
+  { 
+    id: 5, 
+    src: '/achievement/iitb-Agri-Achivement.jpeg',
+    alt: 'IIT Bombay E-Yantra Agribot',
+    title: 'IIT BOMBAY\'S E-YANTRA – AGRIBOT',
+    description: 'Correctly detect and collect ripen tomatoes from every trough. Agribot stands for Agricultural Bot. Got to learn about robot manipulation, navigation, and image processing and implemented the same on Agribot. Successfully completed all tasks.',
+    date: '2022'
+  }
 ];
 
 export default function EventHighlights() {
@@ -58,7 +66,7 @@ export default function EventHighlights() {
   };
 
   return (
-    <section className="py-24 relative overflow-hidden bg-black">
+    <section className="py-12 md:py-24 relative overflow-hidden bg-black">
       <div className="absolute inset-0 bg-gradient-to-b from-red-900/10 to-transparent" />
       
       <motion.div 
@@ -71,10 +79,10 @@ export default function EventHighlights() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-12"
+          className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12"
         >
           <span className="bg-gradient-to-r from-red-500 to-cyan-400 bg-clip-text text-transparent">
-            Event Highlights
+            {"<"} OUR ACHIEVEMENTS {highlights[currentIndex].date} {"/>"}
           </span>
         </motion.h2>
 
@@ -87,7 +95,7 @@ export default function EventHighlights() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.5 }}
-                className="relative aspect-[16/9]"
+                className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:aspect-[16/9] lg:h-auto"
               >
                 <img
                   src={highlights[currentIndex].src}
@@ -98,12 +106,14 @@ export default function EventHighlights() {
                     target.src = "https://placehold.co/800x450/FF0000/FFFFFF?text=Event+Highlight";
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
+                {/* Enhanced gradient overlay - stronger at bottom for better text visibility */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
                   <motion.h3
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-2xl font-bold text-white mb-2"
+                    className="text-xl sm:text-2xl font-bold text-white mb-2"
                   >
                     {highlights[currentIndex].title}
                   </motion.h3>
@@ -111,7 +121,7 @@ export default function EventHighlights() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="text-white/80 mb-2"
+                    className="text-sm sm:text-base text-white/80 mb-2"
                   >
                     {highlights[currentIndex].description}
                   </motion.p>
@@ -119,7 +129,7 @@ export default function EventHighlights() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="text-red-400 text-sm"
+                    className="text-red-400 text-xs sm:text-sm"
                   >
                     {highlights[currentIndex].date}
                   </motion.p>
@@ -128,27 +138,27 @@ export default function EventHighlights() {
             </AnimatePresence>
           </div>
 
-          <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4">
+          <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-2 sm:px-4">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={prevSlide}
-              className="bg-black/50 backdrop-blur-sm text-white p-3 rounded-full hover:bg-black/75 transition-colors duration-200"
+              className="bg-black/50 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-black/75 transition-colors duration-200 z-10"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={20} className="sm:size-24" />
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={nextSlide}
-              className="bg-black/50 backdrop-blur-sm text-white p-3 rounded-full hover:bg-black/75 transition-colors duration-200"
+              className="bg-black/50 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-black/75 transition-colors duration-200 z-10"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={20} className="sm:size-24" />
             </motion.button>
           </div>
         </div>
 
-        <div className="flex justify-center mt-6 space-x-2">
+        <div className="flex justify-center mt-4 sm:mt-6 space-x-2">
           {highlights.map((_, index) => (
             <motion.button
               key={index}
@@ -166,4 +176,4 @@ export default function EventHighlights() {
       </motion.div>
     </section>
   );
-} 
+}

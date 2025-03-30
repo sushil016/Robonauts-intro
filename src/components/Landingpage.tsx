@@ -12,13 +12,12 @@ import {
   Bell, 
   Calendar, 
   Clock, 
-  Globe, 
   AlertCircle,
-  ExternalLink
 } from 'lucide-react';
 import './LandingPage.css';
 import { useNavigate } from 'react-router-dom';
 import useMousePosition from './hooks/mousePosition';
+import UpcomingCompetitions from './UpcomingCompetitions';
 
 const activities = [
   { 
@@ -140,43 +139,6 @@ const liveEvents = [
   }
 ];
 
-// Calculate time remaining for countdown
-const useCountdown = (targetDate: string) => {
-  const calculateTimeLeft = () => {
-    const difference = new Date(targetDate).getTime() - new Date().getTime();
-    
-    if (difference <= 0) {
-      return {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-        isExpired: true
-      };
-    }
-    
-    return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / 1000 / 60) % 60),
-      seconds: Math.floor((difference / 1000) % 60),
-      isExpired: false
-    };
-  };
-  
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-    
-    return () => clearInterval(timer);
-  }, [targetDate]);
-  
-  return timeLeft;
-};
-
 export default function LandingPage() {
   const [scrollY, setScrollY] = useState(0);
   const controls = useAnimation();
@@ -187,9 +149,6 @@ export default function LandingPage() {
   
   // For notification section
   const [activeNotification, setActiveNotification] = useState(0);
-  
-  // Countdown for the next event
-  const timeLeft = useCountdown(liveEvents[0].date);
   
   // Auto-rotate notifications
   useEffect(() => {
@@ -336,7 +295,7 @@ export default function LandingPage() {
             transition={{ delay: 0.9, duration: 0.8 }}
             className="absolute bottom-32 w-full max-w-4xl mx-auto px-4 z-10"
           >
-            <div className="bg-zinc-900/80 backdrop-blur-md border border-zinc-800 rounded-xl overflow-hidden shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-all duration-300 hover:border-zinc-700">
+            <div className="bg-zinc-900/80 backdrop-blur-md border border-zinc-800 rounded-xl overflow-hidden shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-all duration-300">
               <div className="flex items-center justify-center bg-gradient-to-r from-cyan-900/80 to-blue-900/80 px-4 py-3">
                 <Bell className="w-5 h-5 text-cyan-400 mr-2 animate-pulse" />
                 <h3 className="text-white font-semibold tracking-wide">Important Updates</h3>
@@ -442,91 +401,52 @@ export default function LandingPage() {
 
       {/* Live Event Banner with Countdown */}
       {liveEvents.length > 0 && (
-        <div className="relative z-10 bg-gradient-to-r from-red-900/20 to-purple-900/20 py-4 px-4 border-t border-b border-red-500/20">
+        <div className="relative z-10 bg-gradient-to-r from-red-900/20 to-purple-900/20 py-3 sm:py-4 px-3 sm:px-4 border-t border-b border-red-500/20">
           <div className="max-w-7xl mx-auto">
             <motion.div 
-              className="flex flex-col md:flex-row items-center justify-between gap-4 bg-black/40 rounded-xl p-4 backdrop-blur-sm border border-red-500/30"
+              className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 bg-black/40 rounded-lg sm:rounded-xl p-3 sm:p-4 backdrop-blur-sm border border-red-500/30"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <div className="flex items-center">
-                <div className="relative mr-4 flex-shrink-0">
-                  <div className="w-14 h-14 rounded-lg overflow-hidden">
+              <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                <div className="relative flex-shrink-0">
+                  <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-md sm:rounded-lg overflow-hidden">
                     <img 
                       src={liveEvents[0].image} 
                       alt="Live Event" 
                       className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = "https://placehold.co/100x100/FF0000/FFFFFF?text=LIVE";
-                      }}
                     />
                   </div>
-                  {timeLeft.isExpired ? (
-                    <div className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full animate-pulse flex items-center">
-                      <span className="w-2 h-2 bg-white rounded-full mr-1 animate-ping"></span>
+                  {liveEvents[0].isLive && (
+                    <div className="absolute -top-1 -right-1 bg-red-500 rounded-full px-2 py-1 text-xs font-medium text-white flex items-center gap-1">
+                      <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
                       LIVE
-                    </div>
-                  ) : (
-                    <div className="absolute -top-4 -right-3 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-xl flex items-center">
-                      <span className="w-2 h-2 bg-white rounded-full mr-1 animate-ping"></span>
-                      soon
                     </div>
                   )}
                 </div>
-                
-                <div>
-                  <h3 className="text-xl font-bold text-white">{liveEvents[0].title}</h3>
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-sm">
-                    <div className="flex items-center text-gray-300">
-                      <Clock className="w-3 h-3 mr-1 text-red-400" />
-                      {liveEvents[0].startTime} - {liveEvents[0].endTime}
-                    </div>
-                    <div className="flex items-center text-gray-300">
-                      <Globe className="w-3 h-3 mr-1 text-red-400" />
-                      {liveEvents[0].location}
-                    </div>
-                    <div className="flex items-center text-gray-300">
-                      <Users className="w-3 h-3 mr-1 text-red-400" />
-                      {liveEvents[0].participants}
-                    </div>
-                  </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-sm sm:text-base font-medium text-white truncate">
+                    {liveEvents[0].title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-300">
+                    {liveEvents[0].location}
+                  </p>
                 </div>
               </div>
-              
-              {timeLeft.isExpired ? (
-                <button 
-                  onClick={() => navigate(liveEvents[0].link)} 
-                  className="bg-red-700 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
-                >
-                  Watch Now
-                  <ExternalLink className="w-4 h-4" />
-                </button>
-              ) : (
-                <div className="bg-zinc-900/80 px-4 py-3 rounded-lg border border-blue-500/30">
-                  <div className="text-xs text-center mb-1 text-blue-400">Starting in</div>
-                  <div className="flex gap-2 text-white">
-                    <div className="flex flex-col items-center">
-                      <span className="text-xl font-bold">{timeLeft.days}</span>
-                      <span className="text-xs text-gray-400">days</span>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <span className="text-xl font-bold">{timeLeft.hours}</span>
-                      <span className="text-xs text-gray-400">hrs</span>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <span className="text-xl font-bold">{timeLeft.minutes}</span>
-                      <span className="text-xs text-gray-400">min</span>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <span className="text-xl font-bold">{timeLeft.seconds}</span>
-                      <span className="text-xs text-gray-400">sec</span>
-                    </div>
-                  </div>
+
+              <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                <div className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
+                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-red-400" />
+                  <span className="text-gray-200">{liveEvents[0].startTime} - {liveEvents[0].endTime}</span>
                 </div>
-              )}
+                <div className="hidden sm:flex w-px h-6 bg-red-500/30" />
+                <div className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
+                  <Users className="w-4 h-4 sm:w-5 sm:h-5 text-red-400" />
+                  <span className="text-gray-200">{liveEvents[0].participants}</span>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -663,6 +583,10 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </div>
+
+      {/* Upcoming Competitions Section */}
+      <UpcomingCompetitions />
+
     </div>
   );
 }
