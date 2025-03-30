@@ -27,7 +27,7 @@ const mentors: Mentor[] = [
   {
     name: 'Dr. Vaishali Agme',
     image: '/mentors/agme.png', // Path to the second mentor image
-    bio: 'Specializing in AI and Machine Learning',
+    bio: 'Specializing in ',
     social: {
       linkedin: 'https://www.linkedin.com/in/dr-vaishali-agme-ghodke-9577572a4/',
       email: 'vaishali.agme@example.com'
@@ -45,7 +45,7 @@ const mentors: Mentor[] = [
   {
     name: 'Prof. Dilip Radkar',
     image: '/mentors/radkar.png', // Placeholder for the fourth mentor
-    bio: 'Specializing in Embedded Systems',
+    bio: 'Specializing in CAD and CAE',
     social: {
       linkedin: 'https://www.linkedin.com/in/dilip-radkar-a8578226/',
       email: 'dilip.radkar@example.com'

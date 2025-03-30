@@ -43,8 +43,8 @@ const Header: React.FC = () => {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-lg' : 'bg-transparent'}`}>
       <div  className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center space-x-2 md:ml-11">
-          <Cpu className="w-8 h-8 text-purple-400" />
-          <span className="text-2xl font-bold text-gradient">Robonauts</span>
+          <img src="/logo-irl.webp" alt="Logo" className="w-10 h-10" />
+          <span className="text-2xl font-bold text-gradient"><img src="/robonauts.png" alt="logo" className=' h-8' /></span>
         </Link>
         <div className="md:hidden ">
           <button
@@ -61,12 +61,9 @@ const Header: React.FC = () => {
         <nav className="hidden md:block ">
           <ul className="flex space-x-8  sm:pr-32">
             <li><Link to="/" className="hover:text-purple-400 transition-colors">Home</Link></li>
-            <li><a href="#projects" className="hover:text-purple-400 transition-colors">Projects</a></li>
-            <li><a href="#team" className="hover:text-purple-400 transition-colors">Team</a></li>
-            <li><a href="#events" className="hover:text-purple-400 transition-colors">Events</a></li>
-            <li><Link to="/achievements" className="hover:text-purple-400 transition-colors"> Admin Dashboard</Link></li>
-            {/* <li><Link to="/resources" className="hover:text-purple-400 transition-colors">Resources</Link></li>
-            <li><Link to="/contact" className="hover:text-purple-400 transition-colors">Contact</Link></li> */}
+            <li><Link to="/achievements" className="hover:text-purple-400 transition-colors">Achievements</Link></li>
+            <li><Link to="/courses" className="hover:text-purple-400 transition-colors">Workshops</Link></li>
+            <li><Link to="/events" className="hover:text-purple-400 transition-colors">Events</Link></li>
             <Index />
           </ul>
         </nav>

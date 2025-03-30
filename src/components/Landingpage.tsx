@@ -75,99 +75,31 @@ const CircuitBackground = () => (
   </svg>
 );
 
-// Electronic components and code lines effect
+// Static circuit images at corners
 const CodeLinesEffect = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Binary code strings */}
-      {[...Array(15)].map((_, i) => {
-        const startDelay = Math.random() * 10;
-        const duration = 8 + Math.random() * 15;
-        const fontSize = 10 + Math.random() * 4;
-        const opacity = 0.1 + Math.random() * 0.2;
-        const xPos = Math.random() * 100;
-        
-        return (
-          <motion.div
-            key={`code-${i}`}
-            className="absolute text-cyan-500 font-mono whitespace-nowrap"
-            style={{
-              left: `${xPos}%`,
-              top: -100,
-              fontSize: `${fontSize}px`,
-              opacity: opacity,
-              textShadow: '0 0 5px rgba(6, 182, 212, 0.5)'
-            }}
-            initial={{ y: -100 }}
-            animate={{ 
-              y: ['100vh', '250vh']
-            }}
-            transition={{
-              duration: duration,
-              repeat: Infinity,
-              delay: startDelay,
-              ease: "linear"
-            }}
-          >
-            {generateRandomBinary()}
-          </motion.div>
-        );
-      })}
+      {/* Left corner circuit image */}
+      <div className="absolute left-0 bottom-0 w-64 h-64 opacity-30">
+        <img 
+          src="/images/ras.png" 
+          alt="Circuit" 
+          className="w-full h-full object-contain"
+          style={{ filter: 'drop-shadow(0 0 8px rgba(0, 200, 255, 0.6))' }}
+        />
+      </div>
       
-      {/* Electronic circuit elements */}
-      {[...Array(10)].map((_, i) => {
-        const startDelay = Math.random() * 15;
-        const duration = 15 + Math.random() * 20;
-        const size = 20 + Math.random() * 40;
-        const opacity = 0.1 + Math.random() * 0.2;
-        const xPos = Math.random() * 100;
-        
-        return (
-          <motion.div
-            key={`circuit-${i}`}
-            className="absolute text-blue-500"
-            style={{
-              left: `${xPos}%`,
-              top: -100,
-              width: size,
-              height: size,
-              opacity: opacity
-            }}
-            initial={{ y: -100, rotate: 0 }}
-            animate={{ 
-              y: ['100vh', '250vh'],
-              rotate: [0, 180]
-            }}
-            transition={{
-              duration: duration,
-              repeat: Infinity,
-              delay: startDelay,
-              ease: "linear"
-            }}
-          >
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="0.5"/>
-              <path d="M12 6V18" stroke="currentColor" strokeWidth="0.5"/>
-              <path d="M6 12H18" stroke="currentColor" strokeWidth="0.5"/>
-              <circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="0.5"/>
-            </svg>
-          </motion.div>
-        );
-      })}
+      {/* Right corner circuit image */}
+      <div className="absolute right-0 top-0 w-64 h-64 opacity-30">
+        <img 
+          src="/images/line2.png" 
+          alt="Red Circuit" 
+          className="w-full h-full object-contain"
+          style={{ filter: 'drop-shadow(0 0 8px rgba(255, 100, 100, 0.6))' }}
+        />
+      </div>
     </div>
   );
-};
-
-// Helper function to generate random binary strings
-const generateRandomBinary = () => {
-  let binaryString = '';
-  const length = 50 + Math.floor(Math.random() * 100);
-  
-  for (let i = 0; i < length; i++) {
-    binaryString += Math.random() > 0.5 ? '1' : '0';
-  }
-  
-  return binaryString;
 };
 
 // Notification data
@@ -176,7 +108,7 @@ const notifications = [
     id: 1,
     type: 'important',
     title: 'New Robotics Lab Opening',
-    message: 'Our state-of-the-art robotics lab will be opening on April 15, 2025. All members are invited to the inauguration ceremony.',
+    message: 'Our state-of-the-art robotics lab will be opening on July 15, 2025. All members are invited to the inauguration ceremony.',
     date: 'July 15, 2025',
     link: '/resources'
   },
@@ -203,15 +135,15 @@ const liveEvents = [
   {
     id: 1,
     title: 'Recruitment of Freshers "Interviews of FE and SE"',
-    isLive: false,
+    isLive: true,
     startTime: '10:00 AM',
     endTime: '12:00 PM',
     location: 'Innovation And Robotics Lab',
     participants: '24 Members and Counting ',
-    image: '/images/robowars.jpg',
+    image: '/images/robowars.png',
     link: '/events/robowars',
     date: '2025-04-01T10:00:00', // Date for countdown
-    isSoon: true
+    isSoon: false
   }
 ];
 
@@ -358,7 +290,10 @@ export default function LandingPage() {
             transition={{ duration: 1 }}
             className="md:text-[6rem] sm:text-[4rem] text-6xl font-bold mb-4 text-white relative"
           >
-            Welcome to Robonauts
+            <div className="flex items-center justify-center flex-wrap gap-2">
+              <span className="bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">Welcome to</span>
+              <img src="/robonauts-logo.png" alt="Robonauts" className="ml-2 mt-6 h-16 md:h-32 w-auto object-contain hover:scale-105 transition-transform duration-300" />
+            </div>
             <motion.div
               className="absolute -inset-2 bg-cyan-500/20 -z-10 blur-xl"
               animate={{
@@ -376,16 +311,15 @@ export default function LandingPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
-            className="text-4xl mb-8 text-textPrimary"
+            className="text-2xl md:text-4xl mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400 font-medium text-center"
           >
-           Revolutionizing
-           Through Bold Innovation.
+           Revolutionizing Through Bold Innovation.
           </motion.p>
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
-            className="text-xl mb-8 text-neutral-400 opacity-20"
+            className="text-lg md:text-xl mb-8 text-neutral-400 opacity-60 max-w-2xl text-center px-4"
           >
           A Thrilling Journey into the Realm of Robotics & Automation
           </motion.p>
@@ -397,13 +331,13 @@ export default function LandingPage() {
             transition={{ delay: 0.9, duration: 0.8 }}
             className="absolute bottom-32 w-full max-w-4xl mx-auto px-4"
           >
-            <div className="bg-zinc-900/70 backdrop-blur-md border border-zinc-800 rounded-xl overflow-hidden shadow-lg shadow-cyan-500/10">
-              <div className="flex items-center justify-center bg-gradient-to-r from-cyan-900/50 to-blue-900/50 px-4 py-2">
-                <Bell className="w-5 h-5 text-cyan-400 mr-2" />
-                <h3 className="text-white font-semibold">Important Updates</h3>
+            <div className="bg-zinc-900/80 backdrop-blur-md border border-zinc-800 rounded-xl overflow-hidden shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-all duration-300 hover:border-zinc-700">
+              <div className="flex items-center justify-center bg-gradient-to-r from-cyan-900/80 to-blue-900/80 px-4 py-3">
+                <Bell className="w-5 h-5 text-cyan-400 mr-2 animate-pulse" />
+                <h3 className="text-white font-semibold tracking-wide">Important Updates</h3>
               </div>
               
-              <div className="relative h-24">
+              <div className="relative h-28 md:h-24 overflow-hidden">
                 <AnimatePresence mode="wait">
                   {notifications.map((notification, index) => (
                     index === activeNotification && (
@@ -422,11 +356,20 @@ export default function LandingPage() {
                         </div>
                         
                         <div className="flex-1">
-                          <div className="flex justify-between items-start">
+                          <div className="flex justify-between items-start flex-wrap gap-1">
                             <h4 className="text-white font-medium">{notification.title}</h4>
-                            <span className="text-xs text-cyan-400">{notification.date}</span>
+                            <span className="text-xs bg-cyan-500/20 px-2 py-0.5 rounded-full text-cyan-300">{notification.date}</span>
                           </div>
                           <p className="text-gray-300 text-sm mt-1">{notification.message}</p>
+                          <motion.div 
+                            className="mt-2"
+                            whileHover={{ x: 5 }}
+                            transition={{ type: "spring", stiffness: 400 }}
+                          >
+                            <a href={notification.link} className="text-xs flex items-center text-cyan-400 hover:text-cyan-300 transition-colors">
+                              Learn more <ArrowRight className="ml-1 w-3 h-3" />
+                            </a>
+                          </motion.div>
                         </div>
                       </motion.div>
                     )
@@ -440,7 +383,11 @@ export default function LandingPage() {
                   <button
                     key={index}
                     onClick={() => setActiveNotification(index)}
-                    className={`w-2 h-2 rounded-full ${index === activeNotification ? 'bg-cyan-400' : 'bg-zinc-600'}`}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === activeNotification 
+                      ? 'bg-cyan-400 scale-125' 
+                      : 'bg-zinc-600 hover:bg-zinc-500'
+                    }`}
                   />
                 ))}
               </div>
@@ -458,7 +405,31 @@ export default function LandingPage() {
             }}
             className="mt-16"
           >
-            <ChevronDown className="w-12 h-12 text-white" />
+            <motion.button 
+              className="group bg-zinc-900/50 backdrop-blur-sm p-3 rounded-full border border-zinc-800 hover:border-cyan-500/50 transition-colors duration-300 shadow-lg"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                window.scrollTo({
+                  top: window.innerHeight,
+                  behavior: 'smooth'
+                });
+              }}
+            >
+              <ChevronDown className="w-8 h-8 text-cyan-400 group-hover:text-cyan-300 transition-colors" />
+              <motion.div
+                className="absolute inset-0 rounded-full bg-cyan-500/20 -z-10"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </motion.button>
           </motion.div>
         </motion.div>
       </div>
@@ -493,8 +464,9 @@ export default function LandingPage() {
                       LIVE
                     </div>
                   ) : (
-                    <div className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center">
-                      SOON
+                    <div className="absolute -top-4 -right-16 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-xl flex items-center">
+                      <span className="w-2 h-2 bg-white rounded-full mr-1 animate-ping"></span>
+                      Live in {timeLeft.days} days
                     </div>
                   )}
                 </div>

@@ -22,7 +22,7 @@ export const links = [
     to: "/community"
   },
   {
-    title: "Member",
+    title: "Our Members",
     to: "/member"
   },
 
