@@ -1,16 +1,15 @@
 import  { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import CoursesAndWorkshops from './components/CoursesAndWorkshops';
 import Footer from './components/Footer';
 import FloatingActionButton from './components/FloatingActionButton';
 import Resources from './components/Resources';
 import Contact from './components/Contact';
 import RobotMascot from './components/RobotMascotProps';
 import LandingPage from './components/Landingpage';
-import Mentors from './components/Mentors';
-import TechnologyShowcase from './components/TechnologyShowcase';
 import AIMLImpact from './components/AIMLImpact';
+import TechnologyShowcase from './components/TechnologyShowcase';
+import Mentors from './components/Mentors';
 import ApplicationForm from './components/community/ApplicationForm';
 import AdminDashboard from './components/community/AdminDashboard';
 import ClubMembershipForm from './components/community/MemberDetails';
@@ -22,6 +21,20 @@ import ProtectedRoute from './components/admin/ProtectedRoute';
 import AchievementsPage from './components/Achievements';
 import EventHighlights from './components/Achieve';
 import EventsPage from './pages/Events';
+import Workshops from './components/Workshops';
+import BattleBots from './pages/workshops/BattleBots';
+import BattleBotDetail8kg from './pages/workshops/BattleBotDetail8kg';
+
+// Import placeholder components for the other workshop types
+// We will create these components later
+const RoboSoccer = () => <div className="min-h-screen pt-20 bg-black text-white"><h1 className="text-center text-3xl">Robo Soccer Workshop - Coming Soon</h1></div>;
+const RoboSumo = () => <div className="min-h-screen pt-20 bg-black text-white"><h1 className="text-center text-3xl">Robo Sumo Workshop - Coming Soon</h1></div>;
+const Drones = () => <div className="min-h-screen pt-20 bg-black text-white"><h1 className="text-center text-3xl">Drones Workshop - Coming Soon</h1></div>;
+const SkyPlane = () => <div className="min-h-screen pt-20 bg-black text-white"><h1 className="text-center text-3xl">Boeing Sky Plane Workshop - Coming Soon</h1></div>;
+const RCCar = () => <div className="min-h-screen pt-20 bg-black text-white"><h1 className="text-center text-3xl">RC Car Workshop - Coming Soon</h1></div>;
+const WaterBoat = () => <div className="min-h-screen pt-20 bg-black text-white"><h1 className="text-center text-3xl">Water Boat Workshop - Coming Soon</h1></div>;
+const CustomPCB = () => <div className="min-h-screen pt-20 bg-black text-white"><h1 className="text-center text-3xl">Custom PCB Workshop - Coming Soon</h1></div>;
+const WebDevelopment = () => <div className="min-h-screen pt-20 bg-black text-white"><h1 className="text-center text-3xl">Web Development Workshop - Coming Soon</h1></div>;
 
 function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -110,7 +123,17 @@ function App() {
               {/* <TeamMembers /> */}
             </>
           } />
-          <Route path="/courses" element={<CoursesAndWorkshops  />} />
+          <Route path="/workshop" element={<Workshops />} />
+          <Route path="/workshop/battlebots-making" element={<BattleBots />} />
+          <Route path="/workshop/battlebots-making/:category" element={<BattleBotDetail8kg />} />
+          <Route path="/workshop/robosoccer-making" element={<RoboSoccer />} />
+          <Route path="/workshop/robosumo-making" element={<RoboSumo />} />
+          <Route path="/workshop/drones-making" element={<Drones />} />
+          <Route path="/workshop/skyplane-making" element={<SkyPlane />} />
+          <Route path="/workshop/rccar-making" element={<RCCar />} />
+          <Route path="/workshop/waterboat-making" element={<WaterBoat />} />
+          <Route path="/workshop/pcb-making" element={<CustomPCB />} />
+          <Route path="/workshop/webdev-making" element={<WebDevelopment />} />
           <Route path="/resources" element={<Resources/>} />
           <Route path="/contact" element={<Contact  />} />
           <Route path="/events" element={<EventsPage />} />
